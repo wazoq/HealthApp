@@ -22,7 +22,7 @@ tools:context=".HomeActivity">
             android:layout_weight="1"
             android:layout_gravity="left"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickSettings"
             android:src="@drawable/baseline_account_circle_24" />
 
 
