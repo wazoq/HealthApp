@@ -97,8 +97,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBack()
-    {
+    public void onClickBack(View view) {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }

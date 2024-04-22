@@ -83,8 +83,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Implement your authentication logic here
     }
-    public void onClickBack()
-    {
+
+    public void onClickBack(View view) {
         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(intent);
     }

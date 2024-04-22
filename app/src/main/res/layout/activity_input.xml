@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_page"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/screen_background"
+    tools:context=".InputActivity">
+
+
+    <ImageButton
+        android:id="@+id/backImageButton"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_gravity="start"
+        android:background="@null"
+        android:onClick="onClickBack"
+        android:src="@drawable/baseline_arrow_back_24" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/exerciseType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Running"
+            android:textColor="@color/text1"
+            android:layout_gravity="center"
+            android:typeface="monospace"
+            android:layout_margin="10dp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Month Spinner -->
+            <NumberPicker
+                android:id="@+id/monthPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text1"/>
+
+            <!-- Day Spinner -->
+            <NumberPicker
+                android:id="@+id/dayPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/text1"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+        <EditText
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="For How Many Minutes?"
+            android:textColorHint="@color/text1"
+            android:textColor="@color/text1"
+            android:maxLines="1"
+            android:inputType="number"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/text2"
+            android:text="Submit"
+            android:gravity="center" />
+
+
+    </LinearLayout>
+</LinearLayout>
