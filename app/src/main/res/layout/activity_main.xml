@@ -10,7 +10,7 @@
     android:padding="16dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#1c263d"
+    android:background="@color/screen_background"
     tools:context=".MainActivity">
 
     <!-- Makes entry box for user to enter the number-->
@@ -31,7 +31,7 @@
             android:layout_margin="16dp"
             android:radius="0dp"
             android:text="Login"
-        android:backgroundTint="#3e465a"
+        android:backgroundTint="@color/text2"
             android:layout_gravity="center"
             android:layout_centerInParent="true"
             android:gravity="center"
@@ -46,7 +46,7 @@
             android:radius="0dp"
             android:color="#FFA500"
             android:text="Sign Up"
-            android:backgroundTint="#3e465a"
+            android:backgroundTint="@color/text2"
             android:layout_gravity="center"
             android:layout_centerInParent="true"
             android:gravity="center"
