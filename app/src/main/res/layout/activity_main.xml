@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#1c263d"
+    tools:context=".MainActivity">
+
+    <!-- Makes entry box for user to enter the number-->
+
+    <!-- Displays the current total value-->
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+
+        android:src="@drawable/logo" />
+
+    <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:radius="0dp"
+            android:text="Login"
+        android:backgroundTint="#3e465a"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:onClick="onClickLogin" />
+
+        <!-- Button to allow the user to reset the result-->
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:radius="0dp"
+            android:color="#FFA500"
+            android:text="Sign Up"
+            android:backgroundTint="#3e465a"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_below="@id/login"
+            android:onClick="onClickSignUp" />
+
+</LinearLayout>

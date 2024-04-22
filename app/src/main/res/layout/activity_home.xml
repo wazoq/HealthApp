@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/home"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:gravity="center"
+android:background="#1c263d"
+tools:context=".HomeActivity">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/UserIcon"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:background="@null"
+            android:onClick="onClickBack"
+            android:src="@drawable/baseline_account_circle_24" />
+
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="4"
+            android:src="@drawable/logo" />
+
+        <ImageButton
+            android:id="@+id/NotiIcon"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:onClick="onClickBack"
+            android:src="@drawable/bell_solid_circle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="0dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp">
+
+        <!-- First horizontal LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+        android:background="@drawable/border"
+        android:layout_marginBottom="15dp">
+
+        <!-- Left half of the layout (you can add other elements here if needed) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <!-- Placeholder or additional content can go here -->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Participation Year 2024"
+                android:textColor="#888"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Box displaying the day underneath the month -->
+            <TextView
+                android:id="@+id/WelcomeText"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Welcome Hamza"
+                android:textColor="#888"
+                android:gravity="center"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+        <!-- Right half of the layout displaying the date -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_margin="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:id="@+id/monthText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="April"
+                android:background="@drawable/border"
+                android:textColor="#666"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Box displaying the day underneath the month -->
+            <TextView
+                android:id="@+id/dayText"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:text="19"
+                android:textColor="#1c263d"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:background="@drawable/border_white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <!-- Second horizontal LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="4"
+            android:background="@drawable/border"
+            android:layout_marginBottom="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Could put todays activity"
+                >
+            </TextView>
+            <!-- Add views here for the second horizontal layout -->
+        </LinearLayout>
+
+        <!-- Third horizontal LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="5"
+            android:background="@drawable/border"
+            android:gravity="center">
+            <!-- Add views here for the third horizontal layout -->
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/HomeIcon"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@null"
+            android:onClick="onClickBack"
+            android:src="@drawable/homeclicked" />
+
+        <ImageButton
+            android:id="@+id/DataIcon"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@null"
+            android:onClick="onClickBack"
+            android:src="@drawable/exercise_game_running_sport_training_svgrepo_com" />
+
+        <ImageButton
+            android:id="@+id/StatIcon"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@null"
+            android:onClick="onClickBack"
+            android:src="@drawable/chart_colum_svgrepo_com" />
+
+
+    </LinearLayout>
+</LinearLayout>
