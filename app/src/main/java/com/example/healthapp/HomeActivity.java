@@ -28,6 +28,12 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickHome(View view) {
+    }
+
+    public void onClickStat(View view) {
+    }
+
 //    public void onClickStat(View view) {
 //        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
 //        startActivity(intent);
