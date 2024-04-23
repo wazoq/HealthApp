@@ -148,7 +148,7 @@ tools:context=".HomeActivity">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Could put todays activity"
+                android:text="Could put todays activity or add quote of the day using api"
                 >
             </TextView>
             <!-- Add views here for the second horizontal layout -->
