@@ -118,7 +118,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-
             android:textColor="#ffffff" />
 
     </LinearLayout>
@@ -129,14 +128,17 @@
         android:gravity="center_vertical"
         android:paddingTop="0dp"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
-            android:id="@+id/helpAndSupport"
-            android:layout_width="wrap_content"
+            android:id="@+id/change_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="Help and Support       >"
+            android:text="@string/change_name"
+            android:drawableEnd="@drawable/forward_arrow"
             android:textColor="@color/text1"
             android:layout_gravity="center"
             android:typeface="monospace"
@@ -145,19 +147,23 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingTop="0dp"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
-            android:id="@+id/about"
-            android:layout_width="wrap_content"
+            android:id="@+id/change_password_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="About                  >"
+            android:text="@string/change_password"
+            android:drawableEnd="@drawable/forward_arrow"
             android:textColor="@color/text1"
             android:layout_gravity="center"
             android:typeface="monospace"
@@ -166,25 +172,28 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:paddingTop="0dp"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:clickable="true"
+        android:focusable="true">
 
         <TextView
             android:id="@+id/logoutText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="Logout                 >"
-            android:textColor="@color/text1"
             android:layout_gravity="center"
-            android:typeface="monospace"
             android:layout_margin="10dp"
-            android:onClick="onClickLogout"/>
+            android:drawableEnd="@drawable/forward_arrow"
+            android:onClick="onClickLogout"
+            android:text="Logout"
+            android:textColor="@color/text1"
+            android:textSize="24sp"
+            android:typeface="monospace" />
     </LinearLayout>
-
 
 </LinearLayout>
