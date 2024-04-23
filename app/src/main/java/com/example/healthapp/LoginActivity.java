@@ -27,17 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null){
-//            //                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-////                                    startActivity(intent);
-////                                    finish();
-//        }
-//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +70,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Login Success",
                                             Toast.LENGTH_SHORT).show();
 
-//                                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-//                                    startActivity(intent);
-//                                    finish();
+                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(LoginActivity.this, "Authentication failed.",

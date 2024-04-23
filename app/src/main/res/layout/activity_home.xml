@@ -187,10 +187,9 @@ tools:context=".HomeActivity">
             android:id="@+id/DataIcon"
             android:layout_width="50dp"
             android:layout_height="60dp"
-            android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickExercise"
             android:src="@drawable/exercise_game_running_sport_training_svgrepo_com" />
 
         <ImageButton
@@ -200,7 +199,7 @@ tools:context=".HomeActivity">
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickStat"
             android:src="@drawable/chart_colum_svgrepo_com" />
 
 
