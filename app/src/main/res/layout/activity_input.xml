@@ -48,20 +48,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Month Spinner -->
-            <NumberPicker
-                android:id="@+id/monthPicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text1" />
-
-            <!-- Day Spinner -->
-            <NumberPicker
-                android:id="@+id/dayPicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/text1"/>
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
 
 
