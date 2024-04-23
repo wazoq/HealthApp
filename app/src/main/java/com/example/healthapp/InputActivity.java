@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.NumberPicker;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,20 @@ public class InputActivity extends AppCompatActivity {
 
         TextView Title = findViewById(R.id.exerciseType);
         Title.setText(ExerciseType);
+
+
+        NumberPicker monthPicker = findViewById(R.id.monthPicker);
+        final String[] months = new String[]{
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+        };
+        monthPicker.setMinValue(0);
+        monthPicker.setMaxValue(months.length - 1);
+        monthPicker.setDisplayedValues(months);
+        monthPicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        monthPicker.setWrapSelectorWheel(false);
+
+
     }
 
     public void onClickBack(View view) {
