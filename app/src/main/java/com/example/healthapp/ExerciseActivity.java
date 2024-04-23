@@ -71,5 +71,16 @@ public class ExerciseActivity extends AppCompatActivity {
         });
     }
 
+    public void onClickHome(View view) {
+        Intent intent = new Intent(ExerciseActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickExercise(View view) {
+    }
+
+    public void onClickStat(View view) {
+    }
+
 
 }

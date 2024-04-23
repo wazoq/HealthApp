@@ -283,30 +283,30 @@
             android:id="@+id/HomeIcon"
             android:layout_width="50dp"
             android:layout_height="60dp"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickHome"
             android:src="@drawable/home_filled_svgrepo_com" />
 
         <ImageButton
             android:id="@+id/DataIcon"
             android:layout_width="50dp"
             android:layout_height="60dp"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickExercise"
             android:src="@drawable/shoeclicked" />
 
         <ImageButton
             android:id="@+id/StatIcon"
             android:layout_width="50dp"
             android:layout_height="60dp"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickStat"
             android:src="@drawable/chart_colum_svgrepo_com" />
 
 
