@@ -41,7 +41,10 @@
                 android:padding="16dp"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:id="@+id/Running"
+                android:focusable="true">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -86,7 +89,10 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:id="@+id/Swimming"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -131,7 +137,10 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:id="@+id/Weights"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -175,7 +184,10 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:id="@+id/Yoga"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -220,7 +232,10 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:id="@+id/Stairs"
+        android:focusable="true">
 
         <LinearLayout
             android:layout_width="0dp"

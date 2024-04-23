@@ -1,6 +1,9 @@
 package com.example.healthapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +16,22 @@ public class InputActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_input);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        Intent intent = getIntent();
+
+        // Gets the type of Exercise From Last Screen
+        String ExerciseType = intent.getStringExtra("ExerciseType");
+
+        TextView Title = findViewById(R.id.exerciseType);
+        Title.setText(ExerciseType);
     }
+
+    public void onClickBack(View view) {
+        Intent intent = new Intent(InputActivity.this, ExerciseActivity.class);
+        startActivity(intent);
+    }
+
+
+
 }
