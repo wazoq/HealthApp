@@ -8,4 +8,6 @@
     <string name="password">Password</string>
     <string name="first_name">First Name</string>
     <string name="back">Back</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_name">Change Name</string>
 </resources>

@@ -1,12 +1,15 @@
 package com.example.healthapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +45,16 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     notifications = false;
                 }
+            }
+        });
+
+        LinearLayout changePassword = findViewById(R.id.change_password);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsActivity.this, changePasswordActivity.class);
+                intent.putExtra("ExerciseType", "Running");
+                startActivity(intent);
             }
         });
 
