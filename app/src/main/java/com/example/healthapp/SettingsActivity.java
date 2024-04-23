@@ -11,6 +11,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import com.google.firebase.auth.FirebaseAuth;
+
+//import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,9 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, changePasswordActivity.class);
-                intent.putExtra("ExerciseType", "Running");
-                startActivity(intent);
+                // send firebase link to reset password
             }
         });
 
