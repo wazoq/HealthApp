@@ -57,7 +57,8 @@
             android:layout_height="wrap_content"
             android:hint="enter message"
             android:typeface="monospace"
-            android:textColorHint="@color/text2"
+            android:textColorHint="@color/text2">
+        </EditText>
     </LinearLayout>
 
     <Button
