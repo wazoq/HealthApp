@@ -29,6 +29,16 @@ public class ManagerHomeActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout particapantInfoBox = findViewById(R.id.participant_information);
+        particapantInfoBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Redirect to the login page
+                Intent intent = new Intent(ManagerHomeActivity.this, SendNotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

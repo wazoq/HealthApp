@@ -15,6 +15,9 @@
         android:theme="@style/Theme.HealthApp"
         tools:targetApi="31">
         <activity
+            android:name=".ParticipantInformationActivity"
+            android:exported="false" />
+        <activity
             android:name=".SendNotificationActivity"
             android:exported="false" />
         <activity

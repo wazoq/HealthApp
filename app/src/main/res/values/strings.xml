@@ -13,4 +13,10 @@
     <string name="send_notification">Send Notification</string>
     <string name="logout">Logout</string>
     <string name="participant_information">Participant Information</string>
+
+    <string-array name="options_array">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+    </string-array>
 </resources>
