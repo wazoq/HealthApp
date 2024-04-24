@@ -10,4 +10,7 @@
     <string name="back">Back</string>
     <string name="change_password">Change Password</string>
     <string name="change_name">Change Name</string>
+    <string name="send_notification">Send Notification</string>
+    <string name="logout">Logout</string>
+    <string name="participant_information">Participant Information</string>
 </resources>
