@@ -15,10 +15,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -29,12 +35,15 @@ public class SignUpActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
+    FirebaseFirestore firestore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         // Initialize EditText fields
         usernameEditText = findViewById(R.id.username);
@@ -68,7 +77,15 @@ public class SignUpActivity extends AppCompatActivity {
                                     Toast.makeText(SignUpActivity.this, "Account Made.",
                                             Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
+
+
+                                    firestore.collection(username).document("Yoga").set(new HashMap<>());
+                                    firestore.collection(username).document("Running").set(new HashMap<>());
+                                    firestore.collection(username).document("Walking").set(new HashMap<>());
+                                    firestore.collection(username).document("Stairs").set(new HashMap<>());
+                                    firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
+
+                                    Intent intent = new Intent(     SignUpActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
