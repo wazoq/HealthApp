@@ -84,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     firestore.collection(username).document("Walking").set(new HashMap<>());
                                     firestore.collection(username).document("Stairs").set(new HashMap<>());
                                     firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
-
+                                    firestore.collection(username).document("Notis").set(new HashMap<>());
                                     Intent intent = new Intent(     SignUpActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
