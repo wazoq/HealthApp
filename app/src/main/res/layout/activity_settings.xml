@@ -183,13 +183,11 @@
         android:focusable="true">
 
         <TextView
-            android:id="@+id/logoutText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:drawableEnd="@drawable/forward_arrow"
-            android:onClick="onClickLogout"
             android:text="Logout"
             android:textColor="@color/text1"
             android:textSize="24sp"
