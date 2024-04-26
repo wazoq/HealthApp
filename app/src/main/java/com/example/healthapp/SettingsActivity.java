@@ -60,6 +60,29 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+//        LinearLayout logoutBtn = findViewById(R.id.logout_button);
+//        logoutBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // logout user
+//
+//            }
+//        });
+
+        LinearLayout logoutBtn = findViewById(R.id.logout);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                // After logout, clear all activities and start the LoginActivity
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish(); // Call finish to close the current activity
+            }
+        });
+
+
     }
 }
 
