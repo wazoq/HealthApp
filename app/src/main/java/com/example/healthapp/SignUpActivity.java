@@ -2,6 +2,7 @@ package com.example.healthapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.Toast;
+
 
 
 import androidx.annotation.NonNull;
@@ -57,6 +59,9 @@ public class SignUpActivity extends AppCompatActivity {
                 username = String.valueOf(usernameEditText.getText());
                 password = String.valueOf(passwordEditText.getText());
 
+
+
+
                 if(TextUtils.isEmpty(username))
                 {
                     Toast.makeText(SignUpActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
@@ -85,6 +90,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     firestore.collection(username).document("Stairs").set(new HashMap<>());
                                     firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
                                     firestore.collection(username).document("Notis").set(new HashMap<>());
+
+
                                     Intent intent = new Intent(     SignUpActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                     finish();
