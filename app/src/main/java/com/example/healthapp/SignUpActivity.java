@@ -35,6 +35,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     Button signButton;
 
+    EditText nameEditText;
+
     FirebaseAuth mAuth;
 
     FirebaseFirestore firestore;
@@ -50,14 +52,17 @@ public class SignUpActivity extends AppCompatActivity {
         // Initialize EditText fields
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
+        nameEditText = findViewById(R.id.Name);
         signButton = findViewById(R.id.registerButton);
+
 
         signButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username,password;
+                String username,password,name;
                 username = String.valueOf(usernameEditText.getText());
                 password = String.valueOf(passwordEditText.getText());
+                name = String.valueOf(nameEditText.getText());
 
 
 
@@ -90,6 +95,11 @@ public class SignUpActivity extends AppCompatActivity {
                                     firestore.collection(username).document("Stairs").set(new HashMap<>());
                                     firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
                                     firestore.collection(username).document("Notis").set(new HashMap<>());
+
+                                    HashMap<String, Object> userInfo = new HashMap<>();
+                                    userInfo.put("Name", name);
+
+                                    firestore.collection(username).document("UserInfo").set(userInfo);
 
 
                                     Intent intent = new Intent(     SignUpActivity.this, HomeActivity.class);
