@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    android:background="#1c263d"
+    android:background="@color/screen_background"
     tools:context=".SettingsActivity">
 
     <LinearLayout
@@ -123,6 +123,8 @@
     </LinearLayout>
 
     <LinearLayout
+
+        android:id="@+id/change_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -133,7 +135,6 @@
         android:focusable="true">
 
         <TextView
-            android:id="@+id/change_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
@@ -142,8 +143,7 @@
             android:textColor="@color/text1"
             android:layout_gravity="center"
             android:typeface="monospace"
-            android:layout_margin="10dp"
-            android:onClick="onClickHelpSupport"/>
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -158,7 +158,6 @@
         android:focusable="true">
 
         <TextView
-            android:id="@+id/change_password_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"

@@ -3,6 +3,7 @@ package com.example.healthapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
 
+    TextView quoteBox = findViewById(R.id.quote);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void onClickSettings(View view) {
         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickNotifications(View view) {
+        Intent intent = new Intent(HomeActivity.this, NotificationsActivity.class);
         startActivity(intent);
     }
 

@@ -1,6 +1,8 @@
 package com.example.healthapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -25,6 +27,11 @@ public class ParticipantInformationActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
+    }
+
+    public void onClickBack(View view) {
+        Intent intent = new Intent(ParticipantInformationActivity.this, ManagerHomeActivity.class);
+        startActivity(intent);
     }
 
 

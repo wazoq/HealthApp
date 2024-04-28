@@ -1,8 +1,6 @@
 package com.example.healthapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,18 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class SendNotificationActivity extends AppCompatActivity {
+public class NotificationsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_send_notification);
-    }
-
-    public void onClickBack(View view) {
-        Intent intent = new Intent(SendNotificationActivity.this, ManagerHomeActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_notifications);
     }
 }
-

@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    android:background="#1c263d"
+    android:background="@color/screen_background"
     tools:context=".ManagerHomeActivity">
 
 

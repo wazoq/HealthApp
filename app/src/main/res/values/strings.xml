@@ -6,11 +6,6 @@
     <string name="UsersName"></string>
 
 
-
-
-
-
-
     <string name="logo">Logo</string>
     <string name="login">Login</string>
     <string name="sign_up">Sign Up</string>
@@ -24,6 +19,7 @@
     <string name="send_notification">Send Notification</string>
     <string name="logout">Logout</string>
     <string name="participant_information">Participant Information</string>
+    <string name="notifications">Notifications</string>
 
     <string-array name="options_array">
         <item>Day</item>

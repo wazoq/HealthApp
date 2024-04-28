@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/manager_send_notification"
+    android:id="@+id/notifications_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
     android:background="@color/screen_background"
-    tools:context=".SendNotificationActivity">
+    tools:context=".NotificationsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="0dp"
-            android:text="@string/send_notification"
+            android:text="@string/notifications"
             android:textColor="@color/text1"
             android:textSize="25sp"
             android:typeface="monospace" />
@@ -50,25 +50,30 @@
         android:layout_margin="50dp"
         android:clickable="true"
         android:focusable="true">
-
-        <EditText
-            android:id="@+id/message"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="enter message"
-            android:typeface="monospace"
-            android:textColorHint="@color/text2">
-        </EditText>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:radius="0dp"
-        android:backgroundTint="@color/text2"
-        android:text="Send"
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:background="@drawable/border"
+        android:layout_margin="50dp"
+        android:clickable="true"
+        android:focusable="true">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="375dp"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@drawable/border"
+        android:layout_margin="50dp"
+        android:clickable="true"
+        android:focusable="true">
+    </LinearLayout>
 
 </LinearLayout>

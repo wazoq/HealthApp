@@ -40,7 +40,7 @@ tools:context=".HomeActivity">
             android:layout_weight="1"
             android:layout_gravity="right"
             android:background="@null"
-            android:onClick="onClickBack"
+            android:onClick="onClickNotifications"
             android:src="@drawable/bell_solid_circle" />
     </LinearLayout>
 
@@ -146,6 +146,7 @@ tools:context=".HomeActivity">
             android:layout_marginBottom="15dp">
 
             <TextView
+                android:id="@+id/quote"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Could put todays activity or add quote of the day using api"
