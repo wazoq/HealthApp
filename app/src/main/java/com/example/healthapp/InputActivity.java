@@ -10,6 +10,7 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -35,6 +36,8 @@ public class InputActivity extends AppCompatActivity {
     String ExerciseType;
     EditText durationText;
 
+    String selectedDate = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +51,20 @@ public class InputActivity extends AppCompatActivity {
         TextView Title = findViewById(R.id.exerciseType);
         Title.setText(ExerciseType);
 
-        CalendarView Calendar =  findViewById(R.id.calendarView);
+
+        CalendarView calendarView = findViewById(R.id.calendarView);
+
+        // Set the OnDateChangeListener
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                // Format the date with a separator for better readability
+                selectedDate = (month + 1) + "-" + dayOfMonth + "-" + year;
+                // Toast.makeText(InputActivity.this, "Exercise duration updated for " + selectedDate, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
     }
 
@@ -59,47 +75,20 @@ public class InputActivity extends AppCompatActivity {
 
     public void onClickSubmit(View view) {
         firestore = FirebaseFirestore.getInstance();
-        CalendarView Calendar =  findViewById(R.id.calendarView);
+
 
         durationText = findViewById(R.id.time);
         String durationStr = durationText.getText().toString();
         int duration = Integer.parseInt(durationStr);
 
-
-        //The Date in millis secs
-        long selectedDateInMillis = Calendar.getDate();
-
-        Date selectedDate = new Date(selectedDateInMillis);
-
-        // Format the Date object into a desired string format
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy"); // You can adjust the format as needed
-        String formattedDate = sdf.format(selectedDate);
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = user.getEmail();
 
 
-//        firestore.collection(userEmail).document(ExerciseType)
-//                .get()
-//                .addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()) {
-//                        // Check if the document exists
-//                        if (task.getResult().exists()) {
-//
-//
-//                        }
-//                    } else {
-//                        // Handle errors
-//                        Exception exception = task.getException();
-//                        if (exception != null) {
-//                            // Handle exceptions
-//                        }
-//                    }
-//                });
 
 
         firestore.collection(userEmail).document(ExerciseType)
-                .update(formattedDate, duration)
+                .update(selectedDate, duration)
                 .addOnSuccessListener(aVoid -> {
                     // Document successfully updated
                     // Handle success if needed

@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView quoteBox = findViewById(R.id.quote);
+//    TextView quoteBox = findViewById(R.id.quote);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
