@@ -2,7 +2,6 @@ package com.example.healthapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -74,48 +73,28 @@ public class InputActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     public void onClickSubmit(View view) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
-            Toast.makeText(this, "No authenticated user found", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String userEmail = user.getEmail();
         firestore = FirebaseFirestore.getInstance();
+
+
         durationText = findViewById(R.id.time);
         String durationStr = durationText.getText().toString();
+        int duration = Integer.parseInt(durationStr);
 
-        try {
-            int duration = Integer.parseInt(durationStr);
-            firestore.collection(userEmail).document(ExerciseType)
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        int temp = duration;
-                        if (documentSnapshot.exists()) {
-                            Object selectedDateObject = documentSnapshot.get(selectedDate);
-                            if (selectedDateObject != null) {
-                                int currentDuration = ((Long) selectedDateObject).intValue();
-                                temp += currentDuration;
-                            }
-                        }
-                        firestore.collection(userEmail).document(ExerciseType)
-                                .update(selectedDate, temp)
-                                .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(this, "Duration updated successfully!", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(this, "Failed to update duration", Toast.LENGTH_SHORT).show();
-                                });
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Failed to retrieve document", Toast.LENGTH_SHORT).show();
-                    });
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
-        }
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+
+        firestore.collection(userEmail).document(ExerciseType)
+                .update(selectedDate, duration)
+                .addOnSuccessListener(aVoid -> {
+                    // Document successfully updated
+                    // Handle success if needed
+                })
+                .addOnFailureListener(e -> {
+                    // Handle errors
+                    if (e != null) {
+                        // Handle exceptions
+                    }
+                });
     }
-
-
 }
