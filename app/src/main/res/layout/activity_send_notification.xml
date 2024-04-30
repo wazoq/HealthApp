@@ -69,6 +69,7 @@
         android:backgroundTint="@color/text2"
         android:text="Send"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:onClick="onClickSend"/>
 
 </LinearLayout>

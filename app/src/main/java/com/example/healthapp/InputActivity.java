@@ -84,9 +84,6 @@ public class InputActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = user.getEmail();
 
-
-
-
         firestore.collection(userEmail).document(ExerciseType)
                 .update(selectedDate, duration)
                 .addOnSuccessListener(aVoid -> {
@@ -100,8 +97,4 @@ public class InputActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
-
 }
