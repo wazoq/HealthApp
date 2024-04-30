@@ -25,6 +25,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -55,12 +57,31 @@ public class InputActivity extends AppCompatActivity {
 
         CalendarView calendarView = findViewById(R.id.calendarView);
 
-        // Set the OnDateChangeListener
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                // Format the date with a separator for better readability
                 selectedDate = (month + 1) + "-" + dayOfMonth + "-" + year;
+
+                Calendar calendar = Calendar.getInstance();
+                int curYear = calendar.get(Calendar.YEAR);
+                int curMonth = calendar.get(Calendar.MONTH);
+                int curDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+                if (curYear < year) {
+                    calendarView.setDate(calendar.getTimeInMillis(), true, true);
+                }
+
+                if (curYear == year && curMonth < month)
+                {
+                    calendarView.setDate(calendar.getTimeInMillis(), true, true);
+                }
+
+                if(curYear==year && curMonth==month && curDay<dayOfMonth)
+                {
+                    calendarView.setDate(calendar.getTimeInMillis(), true, true);
+                }
+
                 // Toast.makeText(InputActivity.this, "Exercise duration updated for " + selectedDate, Toast.LENGTH_SHORT).show();
             }
         });
@@ -76,6 +97,8 @@ public class InputActivity extends AppCompatActivity {
 
 
     public void onClickSubmit(View view) {
+
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             Toast.makeText(this, "No authenticated user found", Toast.LENGTH_SHORT).show();
@@ -103,10 +126,10 @@ public class InputActivity extends AppCompatActivity {
                         firestore.collection(userEmail).document(ExerciseType)
                                 .update(selectedDate, temp)
                                 .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(this, "Duration updated successfully!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Duration updated!", Toast.LENGTH_SHORT).show();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(this, "Failed to update duration", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show();
                                 });
                     })
                     .addOnFailureListener(e -> {
