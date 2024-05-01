@@ -88,18 +88,16 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
 
 
-
-                                    firestore.collection(username).document("Yoga").set(new HashMap<>());
-                                    firestore.collection(username).document("Running").set(new HashMap<>());
-                                    firestore.collection(username).document("Walking").set(new HashMap<>());
-                                    firestore.collection(username).document("Stairs").set(new HashMap<>());
-                                    firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
-                                    firestore.collection(username).document("Notis").set(new HashMap<>());
+                                    firestore.collection("Emails").document(username).collection("Data").document("Yoga").set(new HashMap<>());
+                                    firestore.collection("Emails").document(username).collection("Data").document("Running").set(new HashMap<>());
+                                    firestore.collection("Emails").document(username).collection("Data").document("Walking").set(new HashMap<>());
+                                    firestore.collection("Emails").document(username).collection("Data").document("Stairs").set(new HashMap<>());
+                                    firestore.collection("Emails").document(username).collection("Data").document("Weight Lifting").set(new HashMap<>());
+                                    firestore.collection("Emails").document(username).collection("Data").document("Notis").set(new HashMap<>());
 
                                     HashMap<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("Name", name);
-
-                                    firestore.collection(username).document("UserInfo").set(userInfo);
+                                    firestore.collection("Emails").document(username).collection("Data").document("UserInfo").set(userInfo);
 
 
                                     Intent intent = new Intent(     SignUpActivity.this, HomeActivity.class);

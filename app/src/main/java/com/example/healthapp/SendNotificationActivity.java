@@ -23,6 +23,12 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
+
+
+
+
 public class SendNotificationActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
@@ -39,7 +45,83 @@ public class SendNotificationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    String[] emailArray = {"ali@gmail.com", "aliranjha703@gmail.com", "hamza2@gmail.com"};
+//    public void getEmails() {
+//        String[] emailArray = {};
+//        firestore = FirebaseFirestore.getInstance();
+//        firestore.collection("your_collection_name")  // Replace "your_collection_name" with the actual name of your collection
+//                .get()
+//                .addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()) {
+//                        for (QueryDocumentSnapshot document : task.getResult()) {
+//                            Log.d(TAG, document.getId() + " => " + document.getData());
+//                            // Assuming email is stored in a field named 'email'
+//                            String email = document.getString("email");
+//                            if (email != null) {
+//                                emailArray.push(email);
+//                            }
+//                        }
+//                    } else {
+//                        Log.d(TAG, "Error getting documents: ", task.getException());
+//                    }
+//                });
+    //}
+
+//    String[] emailArray = {"ali@gmail.com", "aliranjha703@gmail.com", "hamza2@gmail.com"};
+
+
+    public void onClickSend(View view) {
+        firestore = FirebaseFirestore.getInstance();
+        EditText messageEditText = findViewById(R.id.message);
+        String messageText = messageEditText.getText().toString();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            String userEmail = user.getEmail();
+            firestore.collection(userEmail).document("Notis")
+                    .get()
+                    .addOnSuccessListener(docSnapshot -> {
+                        if (docSnapshot.exists()) {
+                            Map<String, Object> data = docSnapshot.getData();
+                            int highestNumber = 0;
+                            for (String key : data.keySet()) {
+                                if (key.startsWith("noti")) {
+                                    String numberStr = key.substring(4); // Remove "noti" prefix
+                                    int number = Integer.parseInt(numberStr);
+                                    if (number > highestNumber) {
+                                        highestNumber = number;
+                                    }
+                                }
+                            }
+                            String temp = "noti" + (highestNumber + 1);
+                            firestore.collection(userEmail).document("Notis")
+                                    .update(temp, messageText)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Document successfully updated
+                                        // Handle success if needed
+                                        Toast.makeText(SendNotificationActivity.this, "Noti Sent.", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        // Handle errors
+                                        if (e != null) {
+                                            // Handle exceptions
+                                            Toast.makeText(SendNotificationActivity.this, "Noti Failed.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        } else {
+                            // Document does not exist, handle accordingly
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle errors
+                        if (e != null) {
+                            // Handle exceptions
+                            Toast.makeText(SendNotificationActivity.this, "Failed to get document: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
 
 
 
@@ -121,61 +203,67 @@ public class SendNotificationActivity extends AppCompatActivity {
 //    }
 
 
-    public void onClickSend(View view) {
-        firestore = FirebaseFirestore.getInstance();
-        EditText messageEditText = findViewById(R.id.message);
-        String messageText = messageEditText.getText().toString();
+//    public void onClickSend(View view) {
+//        firestore = FirebaseFirestore.getInstance();
+//        EditText messageEditText = findViewById(R.id.message);
+//        String messageText = messageEditText.getText().toString();
+//
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        // String userEmail = user.getEmail();
+//
+//
+//
+//        for (String userEmail : emailArray) {
+//            firestore.collection(userEmail).document("Notis")
+//                    .get()
+//                    .addOnSuccessListener(documentSnapshot -> {
+//                        if (documentSnapshot.exists()) {
+//                            Map<String, Object> data = documentSnapshot.getData();
+//                            int highestNumber = 0;
+//                            for (String key : data.keySet()) {
+//                                if (key.startsWith("noti")) {
+//                                    String numberStr = key.substring(4); // Remove "noti" prefix
+//                                    int number = Integer.parseInt(numberStr);
+//                                    if (number > highestNumber) {
+//                                        highestNumber = number;
+//                                    }
+//                                }
+//                            }
+//                            String temp = "noti" + (highestNumber + 1);
+//                            firestore.collection(userEmail).document("Notis")
+//                                    .update(temp, messageText)
+//                                    .addOnSuccessListener(aVoid -> {
+//                                        // Document successfully updated
+//                                        // Handle success if needed
+//                                        Toast.makeText(SendNotificationActivity.this, "Noti Sent.",
+//                                                Toast.LENGTH_SHORT).show();
+//                                    })
+//                                    .addOnFailureListener(e -> {
+//                                        // Handle errors
+//                                        if (e != null) {
+//                                            // Handle exceptions
+//                                            Toast.makeText(SendNotificationActivity.this, "Noti Failed.",
+//                                                    Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                        } else {
+//                            // Document does not exist, handle accordingly
+//                        }
+//                    })
+//                    .addOnFailureListener(e -> {
+//                        // Handle errors
+//                        if (e != null) {
+//                            // Handle exceptions
+//                            Toast.makeText(SendNotificationActivity.this, "Failed to get document: " + e.getMessage(),
+//                                    Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//        }
+//    }
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        // String userEmail = user.getEmail();
 
-        for (String userEmail : emailArray) {
-            firestore.collection(userEmail).document("Notis")
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            Map<String, Object> data = documentSnapshot.getData();
-                            int highestNumber = 0;
-                            for (String key : data.keySet()) {
-                                if (key.startsWith("noti")) {
-                                    String numberStr = key.substring(4); // Remove "noti" prefix
-                                    int number = Integer.parseInt(numberStr);
-                                    if (number > highestNumber) {
-                                        highestNumber = number;
-                                    }
-                                }
-                            }
-                            String temp = "noti" + (highestNumber + 1);
-                            firestore.collection(userEmail).document("Notis")
-                                    .update(temp, messageText)
-                                    .addOnSuccessListener(aVoid -> {
-                                        // Document successfully updated
-                                        // Handle success if needed
-                                        Toast.makeText(SendNotificationActivity.this, "Noti Sent.",
-                                                Toast.LENGTH_SHORT).show();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        // Handle errors
-                                        if (e != null) {
-                                            // Handle exceptions
-                                            Toast.makeText(SendNotificationActivity.this, "Noti Failed.",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                        } else {
-                            // Document does not exist, handle accordingly
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        // Handle errors
-                        if (e != null) {
-                            // Handle exceptions
-                            Toast.makeText(SendNotificationActivity.this, "Failed to get document: " + e.getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-    }
+
+
 
 
 
