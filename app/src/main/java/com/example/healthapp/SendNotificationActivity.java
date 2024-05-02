@@ -41,7 +41,7 @@ public class SendNotificationActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
 
 
-    String[] emailArray = {"account@gmail.com"};
+    String[] emailArray = {};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
