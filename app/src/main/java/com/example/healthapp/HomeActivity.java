@@ -39,12 +39,10 @@ public class HomeActivity extends AppCompatActivity {
     public void onClickHome(View view) {
     }
 
-    public void onClickStat(View view) {
-    }
 
-//    public void onClickStat(View view) {
-//        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-//        startActivity(intent);
-//    }
+    public void onClickStat(View view) {
+        Intent intent = new Intent(HomeActivity.this, StatsActivity.class);
+        startActivity(intent);
+    }
 
 }
