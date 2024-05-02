@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -88,16 +89,23 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
 
 
-                                    firestore.collection("Emails").document(username).collection("Data").document("Yoga").set(new HashMap<>());
-                                    firestore.collection("Emails").document(username).collection("Data").document("Running").set(new HashMap<>());
-                                    firestore.collection("Emails").document(username).collection("Data").document("Walking").set(new HashMap<>());
-                                    firestore.collection("Emails").document(username).collection("Data").document("Stairs").set(new HashMap<>());
-                                    firestore.collection("Emails").document(username).collection("Data").document("Weight Lifting").set(new HashMap<>());
-                                    firestore.collection("Emails").document(username).collection("Data").document("Notis").set(new HashMap<>());
+                                    firestore.collection(username).document("Yoga").set(new HashMap<>());
+                                    firestore.collection(username).document("Running").set(new HashMap<>());
+                                    firestore.collection(username).document("Walking").set(new HashMap<>());
+                                    firestore.collection(username).document("Stairs").set(new HashMap<>());
+                                    firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
+                                    firestore.collection(username).document("Notis").set(new HashMap<>());
 
                                     HashMap<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("Name", name);
-                                    firestore.collection("Emails").document(username).collection("Data").document("UserInfo").set(userInfo);
+                                    firestore.collection(username).document("UserInfo").set(userInfo);
+
+                                    HashMap<String, Object> updateData = new HashMap<>();
+                                    updateData.put(username, username);
+
+                                    firestore.collection("JustEmails").document("Emails")
+                                            .set(updateData, SetOptions.merge());
+
 
 
                                     Intent intent = new Intent(     SignUpActivity.this, HomeActivity.class);

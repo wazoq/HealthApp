@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
@@ -36,9 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if(currentUser != null){
-            Intent intent = new Intent(MainActivity.this, HomeActivity.class); // Change SignUpActivity to HomeActivity
-            startActivity(intent);
+            if(Objects.equals(currentUser.getEmail(), "manager@gmail.com"))
+            {
+                Intent intent = new Intent(MainActivity.this, ManagerHomeActivity.class); // Change SignUpActivity to HomeActivity
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class); // Change SignUpActivity to HomeActivity
+                startActivity(intent);
+            }
         }
     }
 
