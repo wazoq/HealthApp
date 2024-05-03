@@ -14,7 +14,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
 
 
         <TextView
@@ -22,6 +23,7 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:text="Stats"
+            android:typeface="monospace"
             android:textColor="@color/text1"
             android:textSize="35dp" />
 
@@ -35,7 +37,6 @@
         android:id="@+id/Picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -58,6 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Week"
+                android:typeface="monospace"
                 android:textColor="@color/text1"
                 android:layout_margin="4dp"
                 android:textSize="20sp"/>
@@ -69,6 +71,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:typeface="monospace"
             android:background="@drawable/border"
             android:layout_marginEnd="16dp">
 
@@ -95,6 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Year"
+                android:typeface="monospace"
                 android:textColor="@color/text1"
                 android:layout_margin="4dp"
                 android:textSize="20sp"/>
@@ -123,60 +127,414 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="1in"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="20dp"
                     app:cardBackgroundColor="@color/card_background">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="15dp">
+
+                        <!-- Circular Shape Drawable -->
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:src="@drawable/cirlce"/>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:src="@drawable/runningsvg"
+                            android:scaleType="centerCrop"/>
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="Running"
+                            android:typeface="monospace"
+                            android:textColor="@color/text1"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/RunningText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="50 Minutes"
+                            android:typeface="monospace"
+                            android:textColor="#555"
+                            android:textSize="20sp" />
+
+
+                    </LinearLayout>
+                    </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="@color/card_background">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="15dp">
+
+                        <!-- Circular Shape Drawable -->
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:src="@drawable/cirlce"/>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity="start|center_vertical"
+                            android:src="@drawable/walkingsvg"
+                            android:scaleType="centerCrop"/>
+
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="Walking"
+                            android:typeface="monospace"
+                            android:textColor="@color/text1"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/WalkingText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="50 Minutes"
+                            android:typeface="monospace"
+                            android:textColor="#555"
+                            android:textSize="20sp" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="1in"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="20dp"
                     app:cardBackgroundColor="@color/card_background">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp">
+
+                            <!-- Circular Shape Drawable -->
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/cirlce"/>
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/weightlifting_svgrepo_com"
+                                android:scaleType="centerCrop"/>
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="Weight Lifting"
+                                android:typeface="monospace"
+                                android:textColor="@color/text1"
+                                android:textSize="25sp" />
+
+                            <TextView
+                                android:id="@+id/WeightText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="50 Minutes"
+                                android:typeface="monospace"
+                                android:textColor="#555"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="1in"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="20dp"
                     app:cardBackgroundColor="@color/card_background">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp">
+
+                            <!-- Circular Shape Drawable -->
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/cirlce"/>
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/yogasvg"
+                                android:scaleType="centerCrop"/>
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="Yoga"
+                                android:typeface="monospace"
+                                android:textColor="@color/text1"
+                                android:textSize="25sp" />
+
+                            <TextView
+                                android:id="@+id/YogaText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="50 Minutes"
+                                android:typeface="monospace"
+                                android:textColor="#555"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="1in"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="20dp"
                     app:cardBackgroundColor="@color/card_background">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp">
+
+                            <!-- Circular Shape Drawable -->
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/cirlce"/>
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/stairssvg"
+                                android:scaleType="centerCrop"/>
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="Stairs"
+                                android:typeface="monospace"
+                                android:textColor="@color/text1"
+                                android:textSize="25sp" />
+
+                            <TextView
+                                android:id="@+id/StairsText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="50 Minutes"
+                                android:typeface="monospace"
+                                android:textColor="#555"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </androidx.cardview.widget.CardView>
+
+
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="1in"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="20dp"
                     app:cardBackgroundColor="@color/card_background">
 
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="10dp">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp">
+
+                            <!-- Circular Shape Drawable -->
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/cirlce"/>
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_gravity="start|center_vertical"
+                                android:src="@drawable/infinity"
+                                android:scaleType="centerCrop"/>
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="15dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="Total"
+                                android:typeface="monospace"
+                                android:textColor="@color/text1"
+                                android:textSize="25sp" />
+
+                            <TextView
+                                android:id="@+id/TotalText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="50 Minutes"
+                                android:typeface="monospace"
+                                android:textColor="#555"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
@@ -184,7 +542,9 @@
 
 
 
-        </LinearLayout>
+
+
+            </LinearLayout>
 
 
 
