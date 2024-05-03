@@ -1,6 +1,8 @@
 package com.example.healthapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,21 @@ public class StatsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
+    }
+
+    public void onClickExercise(View view) {
+        Intent intent = new Intent(StatsActivity.this, ExerciseActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickHome(View view) {
+        Intent intent = new Intent(StatsActivity.this, HomeActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void onClickStat(View view) {
+
     }
 
 }
