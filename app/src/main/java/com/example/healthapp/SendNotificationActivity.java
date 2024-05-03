@@ -39,8 +39,6 @@ import java.util.Map;
 public class SendNotificationActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
-
-
     String[] emailArray = {};
 
     @Override
