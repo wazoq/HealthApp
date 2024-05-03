@@ -80,6 +80,8 @@ public class ExerciseActivity extends AppCompatActivity {
     }
 
     public void onClickStat(View view) {
+        Intent intent = new Intent(ExerciseActivity.this, StatsActivity.class);
+        startActivity(intent);
     }
 
 

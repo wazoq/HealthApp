@@ -358,14 +358,14 @@
                                 android:layout_width="60dp"
                                 android:layout_height="60dp"
                                 android:layout_gravity="start|center_vertical"
-                                android:src="@drawable/cirlce"/>
+                                android:src="@drawable/cirlce" />
 
                             <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_marginStart="10dp"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_marginStart="7.5dp"
                                 android:layout_gravity="start|center_vertical"
-                                android:src="@drawable/yogasvg"
+                                android:src="@drawable/balanceyoga"
                                 android:scaleType="centerCrop"/>
 
                         </FrameLayout>
