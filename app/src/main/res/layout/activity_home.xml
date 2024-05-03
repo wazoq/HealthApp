@@ -56,6 +56,7 @@ tools:context=".HomeActivity">
 
         <!-- First horizontal LinearLayout -->
         <LinearLayout
+            android:elevation="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -137,6 +138,7 @@ tools:context=".HomeActivity">
 
     <!-- Second horizontal LinearLayout -->
         <LinearLayout
+            android:elevation="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -157,6 +159,7 @@ tools:context=".HomeActivity">
 
         <!-- Third horizontal LinearLayout -->
         <LinearLayout
+            android:elevation="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
