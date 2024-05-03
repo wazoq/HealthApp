@@ -2,6 +2,7 @@ package com.example.healthapp;
 
 import static android.content.ContentValues.TAG;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,15 +41,14 @@ public class NotificationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_notifications);
-
-        //TextView noti = findViewById(R.id.noti1);
+        onClickUpdate();
 
 
 
 
     }
 
-    public void onClickUpdate(View view) {
+    public void onClickUpdate() {
         firestore = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = user.getEmail();
@@ -99,6 +99,40 @@ public class NotificationsActivity extends AppCompatActivity {
 //        notificationTextView.setText(notificationText.toString());
 //    }
 
+//    private void updateNotificationTextView(ArrayList<String> allNotis) {
+//        // Find the parent LinearLayout where you want to add the TextViews
+//        LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
+//
+//        // Clear existing views before adding new ones
+//        parentLayout.removeAllViews();
+//
+//        // Iterate through each notification string
+//        for (String notification : allNotis) {
+//            // Create a new TextView
+//            TextView textView = new TextView(this);
+//
+//            // Set the text of the TextView
+//            textView.setText(notification);
+//            textView.setTextSize(20);
+//            textView.setPadding(20, 20, 20, 20);
+//            textView.setTextColor(getResources().getColor(android.R.color.white));
+//
+//            // Set the background color of the TextView to gray
+//            //textView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+//            textView.setBackgroundColor(Color.parseColor("#3e465a"));
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.MATCH_PARENT
+//            );
+//            params.setMargins(15, 0, 15, 50); // Adjust margins as needed
+//            textView.setLayoutParams(params);
+//
+//            // Add the TextView to the parent layout
+//            parentLayout.addView(textView);
+//        }
+//    }
+
     private void updateNotificationTextView(ArrayList<String> allNotis) {
         // Find the parent LinearLayout where you want to add the TextViews
         LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
@@ -113,23 +147,25 @@ public class NotificationsActivity extends AppCompatActivity {
 
             // Set the text of the TextView
             textView.setText(notification);
-            textView.setTextSize(100);
+            textView.setTextSize(18);
+            textView.setPadding(50, 50, 50, 50);
             textView.setTextColor(getResources().getColor(android.R.color.white));
 
-            // Set the background color of the TextView to gray
-            textView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+            // Set the background drawable resource with rounded corners
+            textView.setBackgroundResource(R.drawable.rounded_corners_background);
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
+                    LinearLayout.LayoutParams.WRAP_CONTENT // Use WRAP_CONTENT for TextView height
             );
-            params.setMargins(0, 0, 0, 16); // Adjust margins as needed
+            params.setMargins(50, 40, 50,  40); // Adjust margins as needed
             textView.setLayoutParams(params);
-
 
             // Add the TextView to the parent layout
             parentLayout.addView(textView);
         }
     }
+
 
 
 }
