@@ -1,5 +1,7 @@
 package com.example.healthapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,12 +25,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 //import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -50,6 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         Switch notificationsSwitch = findViewById(R.id.notifications_switch);
         notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -92,9 +102,44 @@ public class SettingsActivity extends AppCompatActivity {
                 showChangeNameDialog();
             }
         });
+        updateScreenName();
+    }
 
+    public void updateScreenName() {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+        CollectionReference collectionReference = firestore.collection(userEmail);
 
+        // Get document from collection
+        collectionReference.document("UserInfo").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    // DocumentSnapshot contains the data of the document
+                    Map<String, Object> data = document.getData();
+                    // Now you can use the 'data' map to access all fields and their values
+                    Object value = data.get("Name");
+                    String name = value != null ? String.valueOf(value) : "";
+                    // Do something with the retrieved name value, such as displaying it
+                    Log.d(TAG, "Name: " + name);
 
+                    // Call a method to handle the retrieved name value
+                    handleName(name);
+                } else {
+                    Log.d(TAG, "Error: Document doesn't exist");
+                }
+            } else {
+                Log.d(TAG, "Error: Failed to retrieve document", task.getException());
+            }
+        });
+    }
+
+    private void handleName(String name) {
+        // Here, you can use the retrieved name value as needed
+        // For example, you can update a TextView with the name
+        TextView nameTextView = findViewById(R.id.screenName);
+        nameTextView.setText(name);
     }
 
     private void showChangeNameDialog() {
@@ -113,6 +158,7 @@ public class SettingsActivity extends AppCompatActivity {
                 String newName = input.getText().toString();
                 // Handle the new name here (e.g., update user profile or display it)
                 updateUserName(newName);  // Implement this method to update the user's name
+                updateScreenName();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -126,24 +172,45 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void updateUserName(String newName) {
-        // Here you would typically update the user's name in your backend or local storage.
-        // For example, updating the name in Firebase might look something like this:
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(newName)
-                    .build();
-            user.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("Profile", "User name updated.");
-                            }
-                        }
-                    });
-        }
+        String userEmail = user.getEmail();
+        CollectionReference collectionReference = firestore.collection(userEmail);
+
+        // Create a new HashMap to hold the updated data
+        Map<String, Object> newData = new HashMap<>();
+        newData.put("Name", newName);
+
+        // Update the document with the new data
+        collectionReference.document("UserInfo")
+                .update(newData)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    // Handle success, such as displaying a success message
+                    Toast.makeText(this, "Name updated successfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.d(TAG, "Error updating document", e);
+                    // Handle errors, such as displaying an error message
+                    Toast.makeText(this, "Failed to update name", Toast.LENGTH_SHORT).show();
+                });
     }
+
+//        if (user != null) {
+//            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                    .setDisplayName(newName)
+//                    .build();
+//            user.updateProfile(profileUpdates)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                Log.d("Profile", "User name updated.");
+//                            }
+//                        }
+//                    });
+//        }
+ //   }
 
     private void sendPasswordResetEmail() {
         // check what to call in get() method

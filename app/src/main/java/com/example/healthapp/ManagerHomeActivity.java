@@ -2,16 +2,22 @@ package com.example.healthapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ManagerHomeActivity extends AppCompatActivity {
 
@@ -54,8 +60,43 @@ public class ManagerHomeActivity extends AppCompatActivity {
             }
         });
 
-
+        LinearLayout changePassword = findViewById(R.id.change_password);
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // send firebase link to reset password
+                sendPasswordResetEmail();
+            }
+        });
     }
+
+    private void sendPasswordResetEmail() {
+        // check what to call in get() method
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            FirebaseAuth.getInstance().sendPasswordResetEmail(user.getEmail())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // Password reset email sent successfully
+                                // You can inform the user or handle the UI accordingly
+                                Log.d("SendPasswordReset", "Password reset email sent.");
+                                // Optionally, you can show a toast or dialog to inform the user
+                                Toast.makeText(ManagerHomeActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Failed to send password reset email
+                                // You can inform the user or handle the UI accordingly
+                                Log.e("SendPasswordReset", "Failed to send password reset email.", task.getException());
+                                // Optionally, you can show a toast or dialog to inform the user
+                                Toast.makeText(ManagerHomeActivity.this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+
 
 
 

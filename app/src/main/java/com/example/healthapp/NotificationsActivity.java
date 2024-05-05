@@ -2,6 +2,7 @@ package com.example.healthapp;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -42,10 +44,6 @@ public class NotificationsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_notifications);
         onClickUpdate();
-
-
-
-
     }
 
     public void onClickUpdate() {
@@ -88,51 +86,6 @@ public class NotificationsActivity extends AppCompatActivity {
 
     }
 
-//    private void updateNotificationTextView(ArrayList<String> allNotis) {
-//        StringBuilder notificationText = new StringBuilder();
-//        for (String notification : allNotis) {
-//            notificationText.append(notification).append("\n"); // Append each notification with a new line
-//        }
-//        // Find the TextView by ID
-//        TextView notificationTextView = findViewById(R.id.noti1);
-//        // Set the text of the TextView with all notifications
-//        notificationTextView.setText(notificationText.toString());
-//    }
-
-//    private void updateNotificationTextView(ArrayList<String> allNotis) {
-//        // Find the parent LinearLayout where you want to add the TextViews
-//        LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
-//
-//        // Clear existing views before adding new ones
-//        parentLayout.removeAllViews();
-//
-//        // Iterate through each notification string
-//        for (String notification : allNotis) {
-//            // Create a new TextView
-//            TextView textView = new TextView(this);
-//
-//            // Set the text of the TextView
-//            textView.setText(notification);
-//            textView.setTextSize(20);
-//            textView.setPadding(20, 20, 20, 20);
-//            textView.setTextColor(getResources().getColor(android.R.color.white));
-//
-//            // Set the background color of the TextView to gray
-//            //textView.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
-//            textView.setBackgroundColor(Color.parseColor("#3e465a"));
-//
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT,
-//                    LinearLayout.LayoutParams.MATCH_PARENT
-//            );
-//            params.setMargins(15, 0, 15, 50); // Adjust margins as needed
-//            textView.setLayoutParams(params);
-//
-//            // Add the TextView to the parent layout
-//            parentLayout.addView(textView);
-//        }
-//    }
-
     private void updateNotificationTextView(ArrayList<String> allNotis) {
         // Find the parent LinearLayout where you want to add the TextViews
         LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
@@ -161,9 +114,42 @@ public class NotificationsActivity extends AppCompatActivity {
             params.setMargins(50, 40, 50,  40); // Adjust margins as needed
             textView.setLayoutParams(params);
 
+            textView.setOnLongClickListener(v -> {
+                deleteNotification(notification);
+                // Return true to indicate that the long click event is consumed
+                return true;
+            });
+
             // Add the TextView to the parent layout
             parentLayout.addView(textView);
         }
+    }
+
+    private void deleteNotification(String notification) {
+        // Delete the notification from Firebase
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+        CollectionReference collectionReference = firestore.collection(userEmail);
+
+        collectionReference.document("Notis").update(notification, FieldValue.delete())
+                .addOnSuccessListener(aVoid -> {
+                    // Notification deleted successfully
+                    Log.d(TAG, "Notification deleted successfully");
+                    // Update the UI to reflect the changes (reload the notifications)
+                    onClickUpdate();
+                })
+                .addOnFailureListener(e -> {
+                    // Failed to delete the notification
+                    Log.e(TAG, "Error deleting notification", e);
+                    // Show an error message to the user
+                    Toast.makeText(this, "Failed to delete notification", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    public void onClickBack(View view) {
+        Intent intent = new Intent(NotificationsActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 
 
