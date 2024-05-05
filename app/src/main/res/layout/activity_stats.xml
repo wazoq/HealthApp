@@ -47,6 +47,9 @@
 
         <!-- First LinearLayout with text -->
         <LinearLayout
+            android:clickable="true"
+            android:id="@+id/Week"
+            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -67,6 +70,9 @@
 
         <!-- Second LinearLayout with text -->
         <LinearLayout
+            android:clickable="true"
+            android:id="@+id/Month"
+            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -87,6 +93,9 @@
 
         <!-- Third LinearLayout with text -->
         <LinearLayout
+            android:clickable="true"
+            android:id="@+id/Year"
+            android:focusable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/border"
