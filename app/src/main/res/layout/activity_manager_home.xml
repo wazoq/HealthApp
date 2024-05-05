@@ -73,8 +73,30 @@
             android:textColor="@color/text1"
             android:layout_gravity="center"
             android:typeface="monospace"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="16dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:onClick="onClickLogout"/>
+            android:drawableEnd="@drawable/forward_arrow"
+            android:text="Reset Password"
+            android:textColor="@color/text1"
+            android:textSize="23sp"
+            android:typeface="monospace" />
     </LinearLayout>
 
     <LinearLayout

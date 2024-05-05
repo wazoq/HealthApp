@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -113,9 +114,37 @@ public class NotificationsActivity extends AppCompatActivity {
             params.setMargins(50, 40, 50,  40); // Adjust margins as needed
             textView.setLayoutParams(params);
 
+            textView.setOnLongClickListener(v -> {
+                deleteNotification(notification);
+                // Return true to indicate that the long click event is consumed
+                return true;
+            });
+
             // Add the TextView to the parent layout
             parentLayout.addView(textView);
         }
+    }
+
+    private void deleteNotification(String notification) {
+        // Delete the notification from Firebase
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+        CollectionReference collectionReference = firestore.collection(userEmail);
+
+        collectionReference.document("Notis").update(notification, FieldValue.delete())
+                .addOnSuccessListener(aVoid -> {
+                    // Notification deleted successfully
+                    Log.d(TAG, "Notification deleted successfully");
+                    // Update the UI to reflect the changes (reload the notifications)
+                    onClickUpdate();
+                })
+                .addOnFailureListener(e -> {
+                    // Failed to delete the notification
+                    Log.e(TAG, "Error deleting notification", e);
+                    // Show an error message to the user
+                    Toast.makeText(this, "Failed to delete notification", Toast.LENGTH_SHORT).show();
+                });
     }
 
     public void onClickBack(View view) {
