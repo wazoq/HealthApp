@@ -1,3 +1,4 @@
+
 package com.example.healthapp;
 
 import android.content.Intent;
@@ -7,21 +8,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,11 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-
-
 public class StatsActivity extends AppCompatActivity {
-
 
     TextView runningTime;
     TextView weightTime;
@@ -41,12 +32,8 @@ public class StatsActivity extends AppCompatActivity {
     TextView walkingTime;
     TextView stairsTime;
 
-
     private static final String TAG = "StatsActivity";
-
-
     FirebaseFirestore firestore;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,44 +46,35 @@ public class StatsActivity extends AppCompatActivity {
         weightTime = findViewById(R.id.WeightText);
         runningTime = findViewById(R.id.RunningText);
 
-
         LinearLayout WeekLayout = findViewById(R.id.Week);
         LinearLayout MonthLayout = findViewById(R.id.Month);
         LinearLayout YearLayout = findViewById(R.id.Year);
+
         WeekLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   runningTime.setText(getData(7, "Running"));
-//                walkingTime.setText(getData(7,"Waling"));
-                yogaTime.setText(getData(7,"Yoga"));
-//                stairsTime.setText(getData(7,"Stairs"));
-//                weightTime.setText(getData(7,"Weight Lifting"));
+                WeekLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateExerciseStats(7);
+                    }
+                });
             }
         });
 
         MonthLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                runningTime.setText(getData(30,"Running"));
-//                walkingTime.setText(getData(30,"Waling"));
-//                yogaTime.setText(getData(30,"Yoga"));
-//                stairsTime.setText(getData(30,"Stairs"));
-//                weightTime.setText(getData(30,"Weight Lifting"));
+                updateExerciseStats(30);
             }
         });
 
         YearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                runningTime.setText(getData(365,"Running"));
-//                walkingTime.setText(getData(365,"Waling"));
-//                yogaTime.setText(getData(365,"Yoga"));
-//                stairsTime.setText(getData(365,"Stairs"));
-//                weightTime.setText(getData(365,"Weight Lifting"));
+                updateExerciseStats(365);
             }
         });
-
-
     }
 
     public void onClickExercise(View view) {
@@ -109,120 +87,93 @@ public class StatsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     public void onClickStat(View view) {
     }
 
+    public interface DataCallback {
+        void onDataLoaded(HashMap<String, String> data);
+    }
 
-//    public int getData(int time, String Type) {
-//
-//        firestore = FirebaseFirestore.getInstance();
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        String userEmail = user.getEmail();
-//
-//        Calendar calendar = Calendar.getInstance();
-//        int curYear = calendar.get(Calendar.YEAR);
-//        int curMonth = calendar.get(Calendar.MONTH);
-//        int curDay = calendar.get(Calendar.DAY_OF_MONTH);
-//
-//        String selectedDate = (curMonth + 1) + "-" + curDay + "-" + curYear;
-//
-//
-//        List<Integer> totals = new ArrayList();
-//
-//        for (int i = 0; i < time; i++) {
-//
-//            calendar.add(Calendar.DAY_OF_MONTH, -i);
-//            int checkYear = calendar.get(Calendar.YEAR);
-//            int checkMonth = calendar.get(Calendar.MONTH);
-//            int checkDay = calendar.get(Calendar.DAY_OF_MONTH);
-//            String checkDate = (checkMonth + 1) + "-" + checkDay + "-" + checkYear;
-//
-//            firestore.collection(userEmail).document(Type)
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                            if (task.isSuccessful()) {
-//                                DocumentSnapshot document = task.getResult();
-//                                if (document.exists()) {
-//                                    // Get the value of the "checkDate" field
-//                                    String fieldValue = document.getString("checkDate");
-//                                    if (fieldValue != null) {
-//                                        Log.d(TAG, "Value of checkDate field: " + fieldValue);
-//                                        totals.add(Integer.parseInt(fieldValue));
-//                                    } else {
-//                                        Log.d(TAG, "checkDate field does not exist or is null");
-//                                    }
-//                                } else {
-//                                    Log.d(TAG, "No document");
-//                                }
-//                            } else {
-//                                Log.d(TAG, "Error getting document: ", task.getException());
-//                            }
-//                        }
-//                    });
-//
-//
+    public void getALLData(String Type, DataCallback callback) {
+        final HashMap<String, String> fieldValueMap = new HashMap<>(); // Initialize HashMap to store field names and values
+
+        firestore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+
+        firestore.collection(userEmail).document(Type)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                // Iterate through all fields in the document
+                                for (Map.Entry<String, Object> entry : document.getData().entrySet()) {
+                                    String fieldName = entry.getKey();
+                                    String fieldValue = entry.getValue().toString(); // Assuming all values are strings
+
+                                    // Add field name and value to the HashMap
+                                    fieldValueMap.put(fieldName, fieldValue);
+                                }
+                                // Call the callback method with the data
+                                callback.onDataLoaded(fieldValueMap);
+                            } else {
+                                Log.d(TAG, "No document");
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting document: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private int calculateTotalMinutes(HashMap<String, String> data, int time) {
+
+
+        int totalMinutes = 0;
+//        for (String value : data.values()) {
+//            // Assuming the value represents minutes as a string, convert it to int and add to total
+//            totalMinutes += Integer.parseInt(value);
 //        }
-//
-//        int timetotal = 0;
-//        for (int num : totals) {
-//            timetotal += num;
-//        }
-//
-//        return timetotal;
-//
-//    }
-
-
-        public int getData(int time, String Type) {
-
-            firestore = FirebaseFirestore.getInstance();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            String userEmail = user.getEmail();
-
+        for(int i=0; i<time; i++)
+        {
             Calendar calendar = Calendar.getInstance();
-            int curYear = calendar.get(Calendar.YEAR);
-            int curMonth = calendar.get(Calendar.MONTH);
-            int curDay = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.add(Calendar.DAY_OF_MONTH, -i);
+            int Year = calendar.get(Calendar.YEAR);
+            int Month = calendar.get(Calendar.MONTH);
+            int Day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            String selectedDate = (curMonth + 1) + "-" + curDay + "-" + curYear;
-            List<Integer> totals = new ArrayList<>();
-
-//            firestore.collection(userEmail).document(Type)
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                            if (task.isSuccessful()) {
-//                                DocumentSnapshot document = task.getResult();
-//                                if (document.exists()) {
-//                                    // Initialize HashMap to store field names and values
-//                                    HashMap<String, String> fieldValueMap = new HashMap<>();
-//
-//                                    // Iterate through all fields in the document
-//                                    for (Map.Entry<String, Object> entry : document.getData().entrySet()) {
-//                                        String fieldName = entry.getKey();
-//                                        String fieldValue = entry.getValue().toString(); // Assuming all values are strings
-//
-//                                        // Add field name and value to the HashMap
-//                                        fieldValueMap.put(fieldName, fieldValue);
-//                                    }
-//                                } else {
-//                                    Log.d(TAG, "No document");
-//                                }
-//                            } else {
-//                                Log.d(TAG, "Error getting document: ", task.getException());
-//                            }
-//                        }
-//                    });
-
-
-
-            return 100000;
+            String selectedDate = (Month + 1) + "-" + Day + "-" + Year;
+            for (Map.Entry<String, String> entry : data.entrySet()) {
+                // Check if the entry's key (date) matches the selected date
+                if (entry.getKey().equals(selectedDate)) {
+                    // If the date matches, add the minutes to the total
+                    totalMinutes += Integer.parseInt(entry.getValue());
+                }
+            }
         }
 
+        return totalMinutes;
+    }
 
+    private void updateExerciseStats(int time) {
+        updateExerciseStat("Running", runningTime, time);
+        updateExerciseStat("Yoga", yogaTime, time);
+        updateExerciseStat("Walking", walkingTime, time);
+        updateExerciseStat("Stairs", stairsTime, time);
+        updateExerciseStat("Weight Lifting", weightTime, time);
+    }
+
+    private void updateExerciseStat(String exerciseType, TextView textView, int time) {
+        getALLData(exerciseType, new DataCallback() {
+            @Override
+            public void onDataLoaded(HashMap<String, String> data) {
+                int totalMinutes = calculateTotalMinutes(data,time);
+                textView.setText(String.valueOf(totalMinutes));
+            }
+        });
+    }
 
 }
