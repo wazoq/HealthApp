@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,10 +65,14 @@ public class NotificationsActivity extends AppCompatActivity {
                     // Now you can use the 'data' map to access all fields and their values
                     for (String key : data.keySet()) {
                         Object value = data.get(key);
+
+                        String date = key;
+
                         String valueString = String.valueOf(value);
 //                        TextView textView = findViewById(R.id.noti1);
 //                        textView.setText(valueString);
                         allNotis.add(valueString);
+                        allNotis.add(date);
                         // Do something with each field and its value
                         Log.d(TAG, "Field: " + key + ", Value: " + value);
                     }
@@ -94,34 +99,72 @@ public class NotificationsActivity extends AppCompatActivity {
         parentLayout.removeAllViews();
 
         // Iterate through each notification string
-        for (String notification : allNotis) {
-            // Create a new TextView
-            TextView textView = new TextView(this);
+//        for (String notification : allNotis) {
+//            // Create a new TextView
+//            TextView textView = new TextView(this);
+//
+//            // Set the text of the TextView
+//            textView.setText(notification);
+//            textView.setTextSize(18);
+//            textView.setPadding(50, 50, 50, 50);
+//            textView.setTextColor(getResources().getColor(android.R.color.white));
+//
+//            // Set the background drawable resource with rounded corners
+//            textView.setBackgroundResource(R.drawable.rounded_corners_background);
+//
+//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT // Use WRAP_CONTENT for TextView height
+//            );
+//            params.setMargins(50, 40, 50,  40); // Adjust margins as needed
+//            textView.setLayoutParams(params);
+//
+//            textView.setOnLongClickListener(v -> {
+//                deleteNotification(notification);
+//                // Return true to indicate that the long click event is consumed
+//                return true;
+//            });
+//
+//            // Add the TextView to the parent layout
+//            parentLayout.addView(textView);
+//        }
 
-            // Set the text of the TextView
-            textView.setText(notification);
-            textView.setTextSize(18);
-            textView.setPadding(50, 50, 50, 50);
-            textView.setTextColor(getResources().getColor(android.R.color.white));
 
-            // Set the background drawable resource with rounded corners
-            textView.setBackgroundResource(R.drawable.rounded_corners_background);
+        for (int i = 0; i < allNotis.size(); i += 2) {
+            // Get the field name and value at the current index
+            String fieldName = allNotis.get(i);
+            String fieldValue = allNotis.get(i + 1);
+
+            // Concatenate the field name and value with a newline character
+            String fieldText = fieldValue + "\n" + fieldName;
+
+            // Create a new TextView for the field name and value
+            TextView fieldTextView = new TextView(this);
+            fieldTextView.setText(fieldText);
+            fieldTextView.setTextSize(18);
+            fieldTextView.setPadding(50, 50, 50, 50);
+            fieldTextView.setTextColor(getResources().getColor(android.R.color.white));
+            fieldTextView.setBackgroundResource(R.drawable.rounded_corners_background);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT // Use WRAP_CONTENT for TextView height
             );
             params.setMargins(50, 40, 50,  40); // Adjust margins as needed
-            textView.setLayoutParams(params);
-
-            textView.setOnLongClickListener(v -> {
-                deleteNotification(notification);
-                // Return true to indicate that the long click event is consumed
-                return true;
+            fieldTextView.setLayoutParams(params);
+            fieldTextView.setOnTouchListener(new OnSwipeTouchListener(this) {
+                public void onSwipeLeft() {
+                    // Handle swipe left action (delete notification)
+                    deleteNotification(fieldValue);
+                }
+                public void onSwipeRight() {
+                    // Handle swipe left action (delete notification)
+                    //deleteNotification(fieldValue);
+                }
             });
 
             // Add the TextView to the parent layout
-            parentLayout.addView(textView);
+            parentLayout.addView(fieldTextView);
         }
     }
 
@@ -146,6 +189,8 @@ public class NotificationsActivity extends AppCompatActivity {
                     Toast.makeText(this, "Failed to delete notification", Toast.LENGTH_SHORT).show();
                 });
     }
+
+
 
     public void onClickBack(View view) {
         Intent intent = new Intent(NotificationsActivity.this, HomeActivity.class);
