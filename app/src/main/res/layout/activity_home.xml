@@ -195,7 +195,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -231,7 +231,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="Running"
                                 android:textColor="@color/text1"
-                                android:textSize="15sp"
+                                android:textSize="16sp"
                                 android:typeface="monospace" />
 
                             <TextView
@@ -241,7 +241,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="50 Minutes"
                                 android:textColor="#555"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:typeface="monospace" />
 
 
@@ -262,7 +262,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -308,7 +308,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="50 Minutes"
                                 android:textColor="#555"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:typeface="monospace" />
 
 
@@ -337,7 +337,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -373,7 +373,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="Weights"
                                 android:textColor="@color/text1"
-                                android:textSize="15sp"
+                                android:textSize="16sp"
                                 android:typeface="monospace" />
 
                             <TextView
@@ -383,7 +383,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="50 Minutes"
                                 android:textColor="#555"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:typeface="monospace" />
 
 
@@ -404,7 +404,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -440,7 +440,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="Yoga"
                                 android:textColor="@color/text1"
-                                android:textSize="15sp"
+                                android:textSize="16sp"
                                 android:typeface="monospace" />
 
                             <TextView
@@ -450,7 +450,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="50 Minutes"
                                 android:textColor="#555"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:typeface="monospace" />
 
 
@@ -479,7 +479,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -515,7 +515,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="Stairs"
                                 android:textColor="@color/text1"
-                                android:textSize="15sp"
+                                android:textSize="16sp"
                                 android:typeface="monospace" />
 
                             <TextView
@@ -525,7 +525,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="50 Minutes"
                                 android:textColor="#555"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:typeface="monospace" />
 
 
@@ -546,7 +546,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="10dp">
+                        android:padding="5dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -582,7 +582,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="Total"
                                 android:textColor="@color/text1"
-                                android:textSize="15sp"
+                                android:textSize="16sp"
                                 android:typeface="monospace" />
 
                             <TextView
@@ -592,7 +592,7 @@ tools:context=".HomeActivity">
                                 android:gravity="start"
                                 android:text="50 Minutes"
                                 android:textColor="#555"
-                                android:textSize="10sp"
+                                android:textSize="12sp"
                                 android:typeface="monospace" />
 
 
