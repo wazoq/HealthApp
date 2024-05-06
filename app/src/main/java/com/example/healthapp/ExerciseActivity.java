@@ -38,7 +38,7 @@ public class ExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ExerciseActivity.this, InputActivity.class);
-                intent.putExtra("ExerciseType", "Swimming");
+                intent.putExtra("ExerciseType", "Walking");
                 startActivity(intent);
             }
         });

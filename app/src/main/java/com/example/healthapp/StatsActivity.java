@@ -31,6 +31,16 @@ public class StatsActivity extends AppCompatActivity {
     TextView yogaTime;
     TextView walkingTime;
     TextView stairsTime;
+    TextView totalTime;
+
+    TextView runningTimeAvg;
+    TextView weightTimeAvg;
+    TextView yogaTimeAvg;
+    TextView walkingTimeAvg;
+    TextView stairsTimeAvg;
+    TextView totalTimeAvg;
+
+    int totalTimeMin;
     HashMap<String, String> runningData = new HashMap<>();
     HashMap<String, String> walkingData = new HashMap<>();
     HashMap<String, String> stairsData = new HashMap<>();
@@ -51,51 +61,85 @@ public class StatsActivity extends AppCompatActivity {
         yogaTime = findViewById(R.id.YogaText);
         weightTime = findViewById(R.id.WeightText);
         runningTime = findViewById(R.id.RunningText);
+        totalTime = findViewById(R.id.TotalText);
+
+        stairsTimeAvg = findViewById(R.id.StairsAvgText);
+        walkingTimeAvg = findViewById(R.id.WalkingAvgText);
+        yogaTimeAvg= findViewById(R.id.YogaAvgText);
+        weightTimeAvg = findViewById(R.id.WeightAvgText);
+        runningTimeAvg = findViewById(R.id.RunningAvgText);
+        totalTimeAvg = findViewById(R.id.TotalAvgText);
 
         LinearLayout WeekLayout = findViewById(R.id.Week);
         LinearLayout MonthLayout = findViewById(R.id.Month);
         LinearLayout YearLayout = findViewById(R.id.Year);
 
 
+        //Waits for data before updating
+        DataEqual("Running", () -> {
+            DataEqual("Yoga", () -> {
+                DataEqual("Weight Lifting", () -> {
+                    DataEqual("Walking", () -> {
+                        DataEqual("Stairs", () -> {
+                            // This code will run after all data is loaded
+                            updateExerciseStats(7);
+                            WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
+                            String totalOut = "Total:"+totalTimeMin + " Minutes";
+                            totalTime.setText(totalOut);
+                            totalOut = "Avg:"+totalTimeMin/7+ " Minutes";
+                            totalTimeAvg.setText(totalOut);
+                        });
+                    });
+                });
+            });
+        });
 
-        DataEqual("Running");
-        DataEqual("Yoga");
-        DataEqual("Weight Lifting");
-        DataEqual("Walking");
-        DataEqual("Stairs");
 
-        updateExerciseStats(7);
-        WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
 
 
 
         WeekLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                totalTimeMin = 0;
                 updateExerciseStats(7);
                 WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
                 MonthLayout.setBackgroundResource(R.drawable.border);
                 YearLayout.setBackgroundResource(R.drawable.border);
+                String totalOut = "Total:"+totalTimeMin +" Minutes";
+                totalTime.setText(totalOut);
+                totalOut = "Avg:"+totalTimeMin/7+ " Minutes";
+                totalTimeAvg.setText(totalOut);
             }
         });
 
         MonthLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                totalTimeMin = 0;
                 updateExerciseStats(30);
                 WeekLayout.setBackgroundResource(R.drawable.border);
                 MonthLayout.setBackgroundResource(R.drawable.statclickoutline);
                 YearLayout.setBackgroundResource(R.drawable.border);
+                String totalOut = "Total:"+totalTimeMin +" Minutes";
+                totalTime.setText(totalOut);
+                totalOut = "Avg:"+totalTimeMin/30+ " Minutes";
+                totalTimeAvg.setText(totalOut);
             }
         });
 
         YearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                totalTimeMin = 0;
                 updateExerciseStats(365);
                 WeekLayout.setBackgroundResource(R.drawable.border);
                 MonthLayout.setBackgroundResource(R.drawable.border);
                 YearLayout.setBackgroundResource(R.drawable.statclickoutline);
+                String totalOut = "Total:"+totalTimeMin +" Minutes";
+                totalTime.setText(totalOut);
+                totalOut = "Avg:"+totalTimeMin/365+ " Minutes";
+                totalTimeAvg.setText(totalOut);
             }
         });
     }
@@ -154,7 +198,7 @@ public class StatsActivity extends AppCompatActivity {
 
 
 
-    private void calculateTotalMinutes(HashMap<String, String> data,TextView textView, int time) {
+    private void calculateTotalMinutes(HashMap<String, String> data,TextView textView,TextView textViewAvg,int time) {
 
 
         int totalMinutes = 0;
@@ -175,18 +219,24 @@ public class StatsActivity extends AppCompatActivity {
                 }
             }
         }
+        totalTimeMin += totalMinutes;
+        String output = "Total:"+totalMinutes +" Minutes";
+        textView.setText(String.valueOf(output));
 
-        textView.setText(String.valueOf(totalMinutes));
+        int totalMinutesAvg = totalMinutes/time;
+        output = "Avg:"+totalMinutesAvg +" Minutes";
+        textViewAvg.setText(String.valueOf(output));
+
     }
 
     private void updateExerciseStats(int time) {
-        calculateTotalMinutes(runningData, runningTime, time);
-        calculateTotalMinutes(yogaData, yogaTime, time);
-        calculateTotalMinutes(walkingData, walkingTime, time);
-        calculateTotalMinutes(weightsData, weightTime, time);
-        calculateTotalMinutes(stairsData, stairsTime, time);
+        calculateTotalMinutes(runningData, runningTime,runningTimeAvg ,time);
+        calculateTotalMinutes(yogaData, yogaTime, yogaTimeAvg,time);
+        calculateTotalMinutes(walkingData, walkingTime,walkingTimeAvg ,time);
+        calculateTotalMinutes(weightsData, weightTime,weightTimeAvg, time);
+        calculateTotalMinutes(stairsData, stairsTime,stairsTimeAvg, time);
     }
-    private void DataEqual(String exerciseType) {
+    private void DataEqual(String exerciseType, Runnable callback) {
         getALLData(exerciseType, new DataCallback() {
             @Override
             public void onDataLoaded(HashMap<String, String> data) {
@@ -201,16 +251,14 @@ public class StatsActivity extends AppCompatActivity {
                 } else if (exerciseType.equals("Yoga")) {
                     yogaData = data;
                 }
+
+                // Execute the callback after data is loaded
+                callback.run();
             }
         });
     }
 
-    public void updateTotal()
-    {
 
-
-
-    }
 
 
 }

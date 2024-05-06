@@ -195,9 +195,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="..."
                                 android:textColor="#555"
-                                android:textSize="20sp"
+                                android:textSize="17sp"
+                                android:typeface="monospace" />
+
+                            <TextView
+                                android:id="@+id/RunningAvgText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="..."
+                                android:textColor="#555"
+                                android:textSize="17sp"
                                 android:typeface="monospace" />
 
 
@@ -263,10 +273,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="start"
-                            android:text="50 Minutes"
+                            android:text="..."
                             android:typeface="monospace"
                             android:textColor="#555"
-                            android:textSize="20sp" />
+                            android:textSize="17sp" />
+
+                        <TextView
+                            android:id="@+id/WalkingAvgText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:text="..."
+                            android:textColor="#555"
+                            android:textSize="17sp"
+                            android:typeface="monospace" />
 
 
                     </LinearLayout>
@@ -331,10 +351,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="..."
                                 android:typeface="monospace"
                                 android:textColor="#555"
-                                android:textSize="20sp" />
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/WeightAvgText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="..."
+                                android:textColor="#555"
+                                android:textSize="17sp"
+                                android:typeface="monospace" />
 
 
                         </LinearLayout>
@@ -399,10 +429,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="..."
                                 android:typeface="monospace"
                                 android:textColor="#555"
-                                android:textSize="20sp" />
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/YogaAvgText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="..."
+                                android:textColor="#555"
+                                android:textSize="17sp"
+                                android:typeface="monospace" />
 
 
                         </LinearLayout>
@@ -467,10 +507,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="..."
                                 android:typeface="monospace"
                                 android:textColor="#555"
-                                android:textSize="20sp" />
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/StairsAvgText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="..."
+                                android:textColor="#555"
+                                android:textSize="17sp"
+                                android:typeface="monospace" />
 
 
                         </LinearLayout>
@@ -536,10 +586,22 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="..."
                                 android:typeface="monospace"
                                 android:textColor="#555"
-                                android:textSize="20sp" />
+                                android:textSize="17sp" />
+
+                            <TextView
+                                android:id="@+id/TotalAvgText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:text="..."
+                                android:textColor="#555"
+                                android:textSize="17sp"
+                                android:typeface="monospace" />
+
+
 
 
                         </LinearLayout>
