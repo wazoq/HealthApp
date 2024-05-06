@@ -31,6 +31,12 @@ public class StatsActivity extends AppCompatActivity {
     TextView yogaTime;
     TextView walkingTime;
     TextView stairsTime;
+    HashMap<String, String> runningData = new HashMap<>();
+    HashMap<String, String> walkingData = new HashMap<>();
+    HashMap<String, String> stairsData = new HashMap<>();
+    HashMap<String, String> weightsData = new HashMap<>();
+    HashMap<String, String> yogaData = new HashMap<>();
+
 
     private static final String TAG = "StatsActivity";
     FirebaseFirestore firestore;
@@ -50,15 +56,26 @@ public class StatsActivity extends AppCompatActivity {
         LinearLayout MonthLayout = findViewById(R.id.Month);
         LinearLayout YearLayout = findViewById(R.id.Year);
 
+
+
+        DataEqual("Running");
+        DataEqual("Yoga");
+        DataEqual("Weight Lifting");
+        DataEqual("Walking");
+        DataEqual("Stairs");
+
+        updateExerciseStats(7);
+        WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
+
+
+
         WeekLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WeekLayout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        updateExerciseStats(7);
-                    }
-                });
+                updateExerciseStats(7);
+                WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
+                MonthLayout.setBackgroundResource(R.drawable.border);
+                YearLayout.setBackgroundResource(R.drawable.border);
             }
         });
 
@@ -66,6 +83,9 @@ public class StatsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateExerciseStats(30);
+                WeekLayout.setBackgroundResource(R.drawable.border);
+                MonthLayout.setBackgroundResource(R.drawable.statclickoutline);
+                YearLayout.setBackgroundResource(R.drawable.border);
             }
         });
 
@@ -73,6 +93,9 @@ public class StatsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateExerciseStats(365);
+                WeekLayout.setBackgroundResource(R.drawable.border);
+                MonthLayout.setBackgroundResource(R.drawable.border);
+                YearLayout.setBackgroundResource(R.drawable.statclickoutline);
             }
         });
     }
@@ -129,14 +152,12 @@ public class StatsActivity extends AppCompatActivity {
                 });
     }
 
-    private int calculateTotalMinutes(HashMap<String, String> data, int time) {
+
+
+    private void calculateTotalMinutes(HashMap<String, String> data,TextView textView, int time) {
 
 
         int totalMinutes = 0;
-//        for (String value : data.values()) {
-//            // Assuming the value represents minutes as a string, convert it to int and add to total
-//            totalMinutes += Integer.parseInt(value);
-//        }
         for(int i=0; i<time; i++)
         {
             Calendar calendar = Calendar.getInstance();
@@ -155,25 +176,41 @@ public class StatsActivity extends AppCompatActivity {
             }
         }
 
-        return totalMinutes;
+        textView.setText(String.valueOf(totalMinutes));
     }
 
     private void updateExerciseStats(int time) {
-        updateExerciseStat("Running", runningTime, time);
-        updateExerciseStat("Yoga", yogaTime, time);
-        updateExerciseStat("Walking", walkingTime, time);
-        updateExerciseStat("Stairs", stairsTime, time);
-        updateExerciseStat("Weight Lifting", weightTime, time);
+        calculateTotalMinutes(runningData, runningTime, time);
+        calculateTotalMinutes(yogaData, yogaTime, time);
+        calculateTotalMinutes(walkingData, walkingTime, time);
+        calculateTotalMinutes(weightsData, weightTime, time);
+        calculateTotalMinutes(stairsData, stairsTime, time);
     }
-
-    private void updateExerciseStat(String exerciseType, TextView textView, int time) {
+    private void DataEqual(String exerciseType) {
         getALLData(exerciseType, new DataCallback() {
             @Override
             public void onDataLoaded(HashMap<String, String> data) {
-                int totalMinutes = calculateTotalMinutes(data,time);
-                textView.setText(String.valueOf(totalMinutes));
+                if (exerciseType.equals("Running")) {
+                    runningData = data;
+                } else if (exerciseType.equals("Walking")) {
+                    walkingData = data;
+                } else if (exerciseType.equals("Stairs")) {
+                    stairsData = data;
+                } else if (exerciseType.equals("Weight Lifting")) {
+                    weightsData = data;
+                } else if (exerciseType.equals("Yoga")) {
+                    yogaData = data;
+                }
             }
         });
     }
+
+    public void updateTotal()
+    {
+
+
+
+    }
+
 
 }

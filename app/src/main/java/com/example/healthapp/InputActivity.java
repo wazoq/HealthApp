@@ -39,6 +39,8 @@ public class InputActivity extends AppCompatActivity {
     String ExerciseType;
     EditText durationText;
 
+
+
     String selectedDate = "";
 
     @Override
@@ -54,6 +56,12 @@ public class InputActivity extends AppCompatActivity {
         TextView Title = findViewById(R.id.exerciseType);
         Title.setText(ExerciseType);
 
+        //sets default date as today if user doest click a date or else it crashes
+        Calendar calendar = Calendar.getInstance();
+        int curYear = calendar.get(Calendar.YEAR);
+        int curMonth = calendar.get(Calendar.MONTH);
+        int curDay = calendar.get(Calendar.DAY_OF_MONTH);
+        selectedDate = (curMonth + 1) + "-" + curDay + "-" + curYear;
 
         CalendarView calendarView = findViewById(R.id.calendarView);
 
