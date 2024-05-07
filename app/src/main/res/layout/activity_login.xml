@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:layout_gravity="center"
-        android:inputType="textVisiblePassword"
+        android:inputType="textPassword"
         android:textColorHint="@color/text1"
         android:textColor="@color/text1"
         android:maxLines="1"

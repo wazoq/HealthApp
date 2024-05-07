@@ -297,6 +297,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -437,6 +438,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Set up the input
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS); // Capitalize words
+        input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)}); // Set maximum length to 12 characters
         builder.setView(input);
 
         // Set up the buttons
