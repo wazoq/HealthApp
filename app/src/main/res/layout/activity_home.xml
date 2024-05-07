@@ -203,7 +203,7 @@ tools:context=".HomeActivity">
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_margin="15dp">
+                            android:layout_margin="10dp">
 
                             <!-- Circular Shape Drawable -->
                             <ImageView
@@ -225,7 +225,7 @@ tools:context=".HomeActivity">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
                             <TextView
