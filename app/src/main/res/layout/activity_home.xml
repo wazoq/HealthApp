@@ -196,14 +196,14 @@ tools:context=".HomeActivity">
 
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_margin="10dp">
+                            android:layout_margin="15dp">
 
                             <!-- Circular Shape Drawable -->
                             <ImageView
@@ -242,7 +242,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="0 Minutes"
+                                android:text="Loading..."
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -252,6 +252,7 @@ tools:context=".HomeActivity">
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -284,7 +285,7 @@ tools:context=".HomeActivity">
                                 android:layout_height="25dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_gravity="start|center_vertical"
-                                android:src="@drawable/runningsvg"
+                                android:src="@drawable/walkingsvg"
                                 android:scaleType="centerCrop"/>
 
                         </FrameLayout>
@@ -309,7 +310,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="0 Minutes"
+                                android:text="Loading..."
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -384,7 +385,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="0 Minutes"
+                                android:text="Loading..."
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -451,7 +452,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="0 Minutes"
+                                android:text="Loading..."
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -526,7 +527,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="0 Minutes"
+                                android:text="Loading..."
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -593,7 +594,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="0 Minutes"
+                                android:text="Loading..."
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />

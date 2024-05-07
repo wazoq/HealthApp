@@ -24,7 +24,6 @@ public class ManagerHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_manager_home);
 
         LinearLayout sendNotificationBox = findViewById(R.id.send_notification_box);
