@@ -18,7 +18,6 @@ public class ParticipantInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participant_information);
-
     }
 
     public void onClickBack(View view) {
