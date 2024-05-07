@@ -23,6 +23,7 @@
             android:layout_height="50dp"
             android:text="Exercises"
             android:textSize="35dp"
+            android:typeface="monospace"
             android:gravity="center"
             android:textColor="@color/text1"
             />
@@ -61,6 +62,7 @@
                         android:text="Running"
                         android:textSize="25dp"
                         android:textStyle="bold"
+                        android:typeface="monospace"
                         android:textColor="@color/text1" />
                 </LinearLayout>
 
@@ -109,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:text="Walking"
                 android:textSize="25dp"
+                android:typeface="monospace"
                 android:textStyle="bold"
                 android:textColor="@color/text1" />
         </LinearLayout>
@@ -159,6 +162,7 @@
                 android:text="Weight Lifting"
                 android:textSize="25dp"
                 android:textStyle="bold"
+                android:typeface="monospace"
                 android:textColor="@color/text1" />
         </LinearLayout>
 
@@ -207,6 +211,7 @@
                 android:text="Yoga"
                 android:textSize="25dp"
                 android:textStyle="bold"
+                android:typeface="monospace"
                 android:textColor="@color/text1" />
         </LinearLayout>
 
@@ -256,6 +261,7 @@
                 android:text="Stairs"
                 android:textSize="25dp"
                 android:textStyle="bold"
+                android:typeface="monospace"
                 android:textColor="@color/text1" />
         </LinearLayout>
 
