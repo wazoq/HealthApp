@@ -609,41 +609,14 @@
 
                 </androidx.cardview.widget.CardView>
 
-
-
-
-
-
-
             </LinearLayout>
-
-
-
-
 
     </ScrollView>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666"/>
 
 
     <LinearLayout

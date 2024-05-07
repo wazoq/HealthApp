@@ -30,10 +30,6 @@
 
     </LinearLayout>
 
-
-
-
-
             <LinearLayout
                 android:elevation="5dp"
                 android:layout_width="match_parent"
@@ -243,7 +239,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
         android:id="@+id/Stairs"
         android:focusable="true">
@@ -284,7 +280,10 @@
     </LinearLayout>
 
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666"/>
 
     <LinearLayout
         android:layout_width="match_parent"
