@@ -28,7 +28,8 @@
         android:padding="16dp"
         android:orientation="vertical"
         android:gravity="center">
-    <TextView
+
+        <TextView
         android:id="@+id/signupText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +63,7 @@
             android:textColor="@color/text1"
             android:maxLines="1"
             android:drawableEnd="@drawable/lock"
-            android:inputType="textVisiblePassword"
+            android:inputType="textPassword"
             android:layout_margin="10dp"/>
 
         <EditText
@@ -73,6 +74,7 @@
             android:layout_margin="10dp"
             android:maxLines="1"
             android:inputType="text"
+            android:maxLength="12"
             android:hint="@string/first_name"
             android:textColor="@color/text1"
             android:drawableEnd="@drawable/namesvg"

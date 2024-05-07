@@ -65,9 +65,6 @@ public class SignUpActivity extends AppCompatActivity {
                 password = String.valueOf(passwordEditText.getText());
                 name = String.valueOf(nameEditText.getText());
 
-
-
-
                 if(TextUtils.isEmpty(username))
                 {
                     Toast.makeText(SignUpActivity.this, "Enter Email", Toast.LENGTH_SHORT).show();
@@ -77,6 +74,17 @@ public class SignUpActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(password))
                 {
                     Toast.makeText(SignUpActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(name))
+                {
+                    Toast.makeText(SignUpActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(name.length() > 12) {
+                    Toast.makeText(SignUpActivity.this, "Name cannot be longer than 12 letters.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -251,11 +251,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private String getCurrentDate() {
-        // Get today's date
-        Date today = Calendar.getInstance().getTime();
-        // Format the date as "MM-DD-YYYY"
-        SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-yyyy", Locale.getDefault());
-        return dateFormat.format(today);
+//        // Get today's date
+//        Date today = Calendar.getInstance().getTime();
+//        // Format the date as "MM-DD-YYYY"
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-yyyy", Locale.getDefault());
+//        return dateFormat.format(today);
+        Calendar calendar = Calendar.getInstance();
+        int Year = calendar.get(Calendar.YEAR);
+        int Month = calendar.get(Calendar.MONTH);
+        int Day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        return (Month + 1) + "-" + Day + "-" + Year;
     }
 
     // test
