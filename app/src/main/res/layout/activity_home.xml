@@ -55,6 +55,18 @@ tools:context=".HomeActivity">
         android:paddingBottom="16dp">
 
         <!-- First horizontal LinearLayout -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingBottom="25dp"
+            android:text="Participation Year 2024"
+            android:textColor="@color/text1"
+            android:textSize="20sp"
+            android:typeface="monospace"/>
+
         <LinearLayout
             android:elevation="5dp"
             android:layout_width="match_parent"
@@ -72,17 +84,7 @@ tools:context=".HomeActivity">
             android:orientation="vertical"
             android:gravity="center">
             <!-- Placeholder or additional content can go here -->
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Participation Year 2024"
-                android:typeface="monospace"
-                android:textColor="@color/text1"
-                android:gravity="center"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+
 
             <!-- Box displaying the day underneath the month -->
             <TextView
@@ -169,7 +171,8 @@ tools:context=".HomeActivity">
                 android:textSize="20dp"
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
-                android:layout_gravity="start"/>
+                android:layout_gravity="start"
+                android:textColor="@color/text1"/>
 
 
 
@@ -195,12 +198,12 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_margin="15dp">
+                            android:layout_margin="10dp">
 
                             <!-- Circular Shape Drawable -->
                             <ImageView
@@ -222,7 +225,7 @@ tools:context=".HomeActivity">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="15dp"
+                            android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -239,7 +242,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="0 Minutes"
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -262,7 +265,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -306,7 +309,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="0 Minutes"
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -337,7 +340,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -381,7 +384,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="0 Minutes"
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -404,7 +407,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -448,7 +451,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="0 Minutes"
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -479,7 +482,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -523,7 +526,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="0 Minutes"
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />
@@ -546,7 +549,7 @@ tools:context=".HomeActivity">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:padding="5dp">
+                        android:padding="1dp">
 
                         <FrameLayout
                             android:layout_width="wrap_content"
@@ -590,7 +593,7 @@ tools:context=".HomeActivity">
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
-                                android:text="50 Minutes"
+                                android:text="0 Minutes"
                                 android:textColor="#555"
                                 android:textSize="12sp"
                                 android:typeface="monospace" />

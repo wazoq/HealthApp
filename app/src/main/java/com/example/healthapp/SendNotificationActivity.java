@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -110,9 +112,12 @@ public class SendNotificationActivity extends AppCompatActivity {
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
                             int fieldCount = documentSnapshot.getData().size();
-                            String temp = "noti" + (fieldCount + 1);
+                            //String temp = "noti" + (fieldCount + 1);
+                            Date currentDate = new Date();
+                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
+                            String formattedDate = sdf.format(currentDate);
                             firestore.collection(userEmail).document("Notis")
-                                    .update(temp, messageText)
+                                    .update(formattedDate, messageText)
                                     .addOnSuccessListener(aVoid -> {
                                         // Document successfully updated
                                         // Handle success if needed
