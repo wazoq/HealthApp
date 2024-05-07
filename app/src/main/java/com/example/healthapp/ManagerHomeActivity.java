@@ -41,7 +41,7 @@ public class ManagerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Redirect to the login page
-                Intent intent = new Intent(ManagerHomeActivity.this, SendNotificationActivity.class);
+                Intent intent = new Intent(ManagerHomeActivity.this, ManagerSelectionActivity.class);
                 startActivity(intent);
             }
         });
