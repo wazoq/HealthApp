@@ -62,30 +62,6 @@ tools:context=".HomeActivity">
             android:gravity="center"
             android:layout_gravity="center"
             android:paddingBottom="25dp"
-            android:text="Device Registration token"
-            android:textColor="@color/text1"
-            android:textSize="12sp"
-            android:typeface="monospace"/>
-
-        <EditText
-            android:id="@+id/etToken"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="text|textImeMultiLine"
-            android:paddingBottom="25dp"
-            android:text="Name"
-            android:textColor="@color/text1"
-            android:textSize="12sp"
-            android:typeface="monospace" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:paddingBottom="25dp"
             android:text="Participation Year 2024"
             android:textColor="@color/text1"
             android:textSize="20sp"

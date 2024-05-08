@@ -47,17 +47,6 @@ public class HomeActivity extends AppCompatActivity {
     // Define the total TextView
     TextView totalTextView;
 
-    // test cloud
-    EditText etToken;
-
-
-
-
-
-
-
-
-    // Declare the launcher at the top of your Activity/Fragment:
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
@@ -85,80 +74,12 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         totalTextView = findViewById(R.id.totalText);
         askNotificationPermission();
-
-
-
-
-
-
-
-
-
-
-//        etToken = findViewById(R.id.etToken);
-//
-//        FirebaseMessaging.getInstance().getToken()
-//                .addOnCompleteListener(new OnCompleteListener<String>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<String> task) {
-//                        if (!task.isSuccessful()) {
-//                            //Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-//                            System.out.println("Fetching FCM registration token failed");
-//                            return;
-//                        }
-//
-//                        // Get new FCM registration token
-//                        String token = task.getResult();
-//
-//                        // Log and toast
-//                        //Log.d(TAG, msg);
-//                        System.out.println(token);
-//                        Toast.makeText(HomeActivity.this, "Your device registration token is " + token,
-//                                Toast.LENGTH_SHORT).show();
-//                        etToken.setText(token);
-//                    }
-//                });
-
-
-
-
-
-
-
-
-
-
-
-
-
         updateName();
         updateDate();
         updateData();
