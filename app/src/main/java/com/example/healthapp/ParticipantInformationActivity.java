@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.api.Distribution;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -76,6 +77,7 @@ public class ParticipantInformationActivity extends AppCompatActivity {
         LinearLayout WeekLayout = findViewById(R.id.Week);
         LinearLayout MonthLayout = findViewById(R.id.Month);
         LinearLayout YearLayout = findViewById(R.id.Year);
+        LinearLayout DayLayout = findViewById(R.id.Day);
 
 
         //Waits for data before updating
@@ -85,11 +87,11 @@ public class ParticipantInformationActivity extends AppCompatActivity {
                     DataEqual("Walking", () -> {
                         DataEqual("Stairs", () -> {
                             // This code will run after all data is loaded
-                            updateExerciseStats(7);
-                            WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
+                            updateExerciseStats(1);
+                            DayLayout.setBackgroundResource(R.drawable.statclickoutline);
                             String totalOut = "Total:"+totalTimeMin + " Minutes";
                             totalTime.setText(totalOut);
-                            totalOut = "Avg:"+totalTimeMin/7+ " Minutes";
+                            totalOut = "";
                             totalTimeAvg.setText(totalOut);
                         });
                     });
@@ -98,6 +100,17 @@ public class ParticipantInformationActivity extends AppCompatActivity {
         });
 
 
+        DayLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                totalTimeMin = 0;
+                updateExerciseStats(1);
+                DayLayout.setBackgroundResource(R.drawable.statclickoutline);
+                WeekLayout.setBackgroundResource(R.drawable.border);
+                MonthLayout.setBackgroundResource(R.drawable.border);
+                YearLayout.setBackgroundResource(R.drawable.border);
+            }
+        });
 
 
 
@@ -107,12 +120,9 @@ public class ParticipantInformationActivity extends AppCompatActivity {
                 totalTimeMin = 0;
                 updateExerciseStats(7);
                 WeekLayout.setBackgroundResource(R.drawable.statclickoutline);
+                DayLayout.setBackgroundResource(R.drawable.border);
                 MonthLayout.setBackgroundResource(R.drawable.border);
                 YearLayout.setBackgroundResource(R.drawable.border);
-                String totalOut = "Total:"+totalTimeMin +" Minutes";
-                totalTime.setText(totalOut);
-                totalOut = "Avg:"+totalTimeMin/7+ " Minutes";
-                totalTimeAvg.setText(totalOut);
             }
         });
 
@@ -122,12 +132,9 @@ public class ParticipantInformationActivity extends AppCompatActivity {
                 totalTimeMin = 0;
                 updateExerciseStats(30);
                 WeekLayout.setBackgroundResource(R.drawable.border);
+                DayLayout.setBackgroundResource(R.drawable.border);
                 MonthLayout.setBackgroundResource(R.drawable.statclickoutline);
                 YearLayout.setBackgroundResource(R.drawable.border);
-                String totalOut = "Total:"+totalTimeMin +" Minutes";
-                totalTime.setText(totalOut);
-                totalOut = "Avg:"+totalTimeMin/30+ " Minutes";
-                totalTimeAvg.setText(totalOut);
             }
         });
 
@@ -138,11 +145,8 @@ public class ParticipantInformationActivity extends AppCompatActivity {
                 updateExerciseStats(365);
                 WeekLayout.setBackgroundResource(R.drawable.border);
                 MonthLayout.setBackgroundResource(R.drawable.border);
+                DayLayout.setBackgroundResource(R.drawable.border);
                 YearLayout.setBackgroundResource(R.drawable.statclickoutline);
-                String totalOut = "Total:"+totalTimeMin +" Minutes";
-                totalTime.setText(totalOut);
-                totalOut = "Avg:"+totalTimeMin/365+ " Minutes";
-                totalTimeAvg.setText(totalOut);
             }
         });
     }
@@ -215,9 +219,16 @@ public class ParticipantInformationActivity extends AppCompatActivity {
         String output = "Total:"+totalMinutes +" Minutes";
         textView.setText(String.valueOf(output));
 
-        int totalMinutesAvg = totalMinutes/time;
-        output = "Avg:"+totalMinutesAvg +" Minutes";
-        textViewAvg.setText(String.valueOf(output));
+        if(time!=1){
+            int totalMinutesAvg = totalMinutes/time;
+            output = "Avg:"+totalMinutesAvg +" Minutes";
+            textViewAvg.setText(String.valueOf(output));
+        }
+        else {
+            textViewAvg.setText(" ");
+        }
+
+
 
     }
 

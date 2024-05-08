@@ -146,6 +146,25 @@ public class InputActivity extends AppCompatActivity {
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
         }
+
+            int duration = Integer.parseInt(durationStr);
+            firestore.collection("GroupStats").document(ExerciseType)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        int temp = duration;
+                        if (documentSnapshot.exists()) {
+                            Object selectedDateObject = documentSnapshot.get(selectedDate);
+                            if (selectedDateObject != null) {
+                                int currentDuration = ((Long) selectedDateObject).intValue();
+                                temp += currentDuration;
+                            }
+                        }
+                        firestore.collection("GroupStats").document(ExerciseType)
+                                .update(selectedDate, temp);
+                    });
+
+
+
     }
 
 

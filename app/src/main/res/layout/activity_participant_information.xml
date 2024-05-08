@@ -70,6 +70,29 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
+
+        <LinearLayout
+            android:clickable="true"
+            android:id="@+id/Day"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:typeface="monospace"
+            android:background="@drawable/border"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Day "
+                android:textColor="@color/text1"
+                android:layout_margin="4dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
         <!-- First LinearLayout with text -->
         <LinearLayout
             android:clickable="true"

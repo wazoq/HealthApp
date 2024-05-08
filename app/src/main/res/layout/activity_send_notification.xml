@@ -62,7 +62,7 @@
             android:id="@+id/message"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="enter message"
+            android:hint="Enter Message"
             android:typeface="monospace"
             android:textColorHint="@color/text2">
         </EditText>

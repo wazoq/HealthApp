@@ -89,12 +89,13 @@ public class ManagerSelectionActivity extends AppCompatActivity {
 
     }
 
+
+
+
+
     private void updateNotificationTextView(ArrayList<String> allNotis) {
         // Find the parent LinearLayout where you want to add the TextViews
         LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
-
-        // Clear existing views before adding new ones
-        parentLayout.removeAllViews();
 
         // Iterate through each notification string
         for (String notification : allNotis) {
@@ -118,6 +119,7 @@ public class ManagerSelectionActivity extends AppCompatActivity {
             textView.setLayoutParams(params);
 
             textView.setOnClickListener(v -> {
+
                 Intent intent = new Intent(ManagerSelectionActivity.this, ParticipantInformationActivity.class);
                 intent.putExtra("Email", textView.getText());
                 startActivity(intent);
@@ -136,6 +138,12 @@ public class ManagerSelectionActivity extends AppCompatActivity {
 
     public void onClickBack(View view) {
         Intent intent = new Intent(ManagerSelectionActivity.this, ManagerHomeActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickGroup(View view) {
+        Intent intent = new Intent(ManagerSelectionActivity.this, ParticipantInformationActivity.class);
+        intent.putExtra("Email", "GroupStats");
         startActivity(intent);
     }
 
