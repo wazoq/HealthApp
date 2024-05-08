@@ -1,5 +1,7 @@
 package com.example.healthapp;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -25,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -104,9 +107,44 @@ public class SignUpActivity extends AppCompatActivity {
                                     firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
                                     firestore.collection(username).document("Notis").set(new HashMap<>());
 
-                                    HashMap<String, Object> userInfo = new HashMap<>();
-                                    userInfo.put("Name", name);
-                                    firestore.collection(username).document("UserInfo").set(userInfo);
+
+//                                    final String[] token = new String[1];
+//
+//                                    // test token
+//                                    FirebaseMessaging.getInstance().getToken()
+//                                            .addOnCompleteListener(new OnCompleteListener<String>() {
+//                                                @Override
+//                                                public void onComplete(@NonNull Task<String> task) {
+//                                                    if (!task.isSuccessful()) {
+//                                                        //Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+//                                                        System.out.println("Fetching FCM registration token failed");
+//                                                        return;
+//                                                    }
+//
+//                                                    // Get new FCM registration token
+//                                                    token[0] = task.getResult();
+//
+//                                                    // Log and toast
+//                                                    //Log.d(TAG, msg);
+//                                                    System.out.println(token[0]);
+//                                                    Toast.makeText(SignUpActivity.this, "Your device registration token is " + token[0],
+//                                                            Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            });
+//                                    // test token close
+
+
+
+
+
+
+
+
+
+//                                    HashMap<String, Object> userInfo = new HashMap<>();
+//                                    userInfo.put("Name", name);
+//                                    userInfo.put("Token" , token[0]);
+//                                    firestore.collection(username).document("UserInfo").set(userInfo);
 
                                     HashMap<String, Object> updateData = new HashMap<>();
                                     updateData.put(username, username);
@@ -126,6 +164,57 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
+
+
+
+
+
+
+
+
+
+
+                FirebaseMessaging.getInstance().getToken()
+                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                            @Override
+                            public void onComplete(@NonNull Task<String> task) {
+                                if (task.isSuccessful()) {
+                                    // Get new FCM registration token
+                                    String token = task.getResult();
+
+                                    // Log and toast
+                                    Log.d(TAG, "FCM Token: " + token);
+
+                                    // Store the token in Firestore along with other user information
+                                    HashMap<String, Object> userInfo = new HashMap<>();
+                                    userInfo.put("Name", name);
+                                    userInfo.put("Token", token);
+                                    firestore.collection(username).document("UserInfo").set(userInfo);
+
+                                    // Proceed with other Firestore operations or navigate to the next screen
+                                } else {
+                                    // Handle token retrieval failure
+                                    Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                                    Toast.makeText(SignUpActivity.this, "Failed to get FCM token",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
