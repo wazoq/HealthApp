@@ -81,8 +81,6 @@ public class NotificationsActivity extends AppCompatActivity {
                         String date = key;
 
                         String valueString = String.valueOf(value);
-//                        TextView textView = findViewById(R.id.noti1);
-//                        textView.setText(valueString);
                         allNotis.add(valueString);
                         allNotis.add(date);
                         // Do something with each field and its value
@@ -96,6 +94,31 @@ public class NotificationsActivity extends AppCompatActivity {
                 Log.d(TAG, "get failed with ", task.getException());
             }
         });
+
+
+
+        firestore.collection(userEmail).document("UserInfo")
+                .update("newNoti", false)
+                .addOnSuccessListener(aVoid -> {
+                    // Document successfully updated
+                    // Handle success if needed
+
+                    //FCMSend.pushNotification();
+                    Toast.makeText(NotificationsActivity.this, "newNoti boolean changed false.",
+                            Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Handle errors
+                    if (e != null) {
+                        // Handle exceptions
+                        Toast.makeText(NotificationsActivity.this, "newNoti boolean change failed.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
 
 
 
