@@ -120,6 +120,8 @@ public class SendNotificationActivity extends AppCompatActivity {
                                     .addOnSuccessListener(aVoid -> {
                                         // Document successfully updated
                                         // Handle success if needed
+
+                                        //FCMSend.pushNotification();
                                         Toast.makeText(SendNotificationActivity.this, "Noti Sent.",
                                                 Toast.LENGTH_SHORT).show();
                                     })

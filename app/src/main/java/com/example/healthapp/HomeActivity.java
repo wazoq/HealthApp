@@ -37,6 +37,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
+
+// create a new field in notis called read, everytime you add noti, read = false
+// and everytime notis page open, read = true
+
 public class HomeActivity extends AppCompatActivity {
 
 //    TextView quoteBox = findViewById(R.id.quote);
