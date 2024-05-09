@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+
+
+// create a new field in notis called read, everytime you add noti, read = false
+// and everytime notis page open, read = true
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -95,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         updateName();
         updateDate();
         updateData();
+        checkNewNoti();
     }
 
     public void updateData() {
@@ -362,13 +369,10 @@ public class HomeActivity extends AppCompatActivity {
                     Map<String, Object> data = document.getData();
                     // Now you can use the 'data' map to access all fields and their values
                     Object value = data.get("Name");
-                    Object tValue = data.get("Token");
 
                     String name = value != null ? String.valueOf(value) : "";
-                    String token = tValue != null ? String.valueOf(tValue) : "";
                     // Do something with the retrieved name value, such as displaying it
                     Log.d(TAG, "Name: " + name);
-                    Log.d(TAG, "Token: " + token);
 
                     // Call a method to handle the retrieved name value
                     handleName(name);
@@ -411,5 +415,58 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(HomeActivity.this, StatsActivity.class);
         startActivity(intent);
     }
+
+    public void checkNewNoti() {
+        ImageButton notiIcon = findViewById(R.id.NotiIcon);
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userEmail = user.getEmail();
+        CollectionReference collectionReference = firestore.collection(userEmail);
+
+        // Get document from collection
+        collectionReference.document("UserInfo").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    // DocumentSnapshot contains the data of the document
+                    Map<String, Object> data = document.getData();
+                    // Now you can use the 'data' map to access all fields and their values
+                    Object value = data.get("newNoti");
+
+                    if (value != null && value instanceof Boolean) {
+                        // Cast the value to Boolean
+                        Boolean newNoti = (Boolean) value;
+
+                        // Now you can use the boolean value as needed
+                        if (newNoti) {
+                            // Handle the case when 'newNoti' is true
+                            notiIcon.setImageResource(R.drawable.bell_with_noti);
+                        } else {
+                            // Handle the case when 'newNoti' is false
+                            notiIcon.setImageResource(R.drawable.bell_solid_circle);
+                        }
+                    } else {
+                        // Handle the case when the value is null or not of type Boolean
+                        // For example, set a default image resource
+                        notiIcon.setImageResource(R.drawable.bell_solid_circle);
+                    }
+
+                    // Call a method to handle the retrieved name value
+                } else {
+                    Log.d(TAG, "Error: Document doesn't exist");
+                }
+            } else {
+                Log.d(TAG, "Error: Failed to retrieve document", task.getException());
+            }
+        });
+
+
+
+
+    }
+
+
+
+
 
 }

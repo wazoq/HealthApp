@@ -120,6 +120,8 @@ public class SendNotificationActivity extends AppCompatActivity {
                                     .addOnSuccessListener(aVoid -> {
                                         // Document successfully updated
                                         // Handle success if needed
+
+                                        //FCMSend.pushNotification();
                                         Toast.makeText(SendNotificationActivity.this, "Noti Sent.",
                                                 Toast.LENGTH_SHORT).show();
                                     })
@@ -131,6 +133,30 @@ public class SendNotificationActivity extends AppCompatActivity {
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     });
+
+                            firestore.collection(userEmail).document("UserInfo")
+                                    .update("newNoti", true)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Document successfully updated
+                                        // Handle success if needed
+
+                                        //FCMSend.pushNotification();
+                                        Toast.makeText(SendNotificationActivity.this, "newNoti boolean added.",
+                                                Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        // Handle errors
+                                        if (e != null) {
+                                            // Handle exceptions
+                                            Toast.makeText(SendNotificationActivity.this, "newNoti boolean failed.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+
+
+
+
                         } else {
                             // Document does not exist, handle accordingly
                         }
