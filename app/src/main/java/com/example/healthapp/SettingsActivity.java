@@ -336,8 +336,7 @@ public class SettingsActivity extends AppCompatActivity {
     Boolean darkMode;
     private Switch Switch;
     boolean nightMode;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+
     Boolean notifications;
 
     @Override
@@ -359,6 +358,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor;
         editor = sharedPreferences.edit();
 
 

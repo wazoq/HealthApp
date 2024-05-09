@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/screen_background"
     tools:context=".ExerciseActivity">
 
     <LinearLayout
@@ -145,8 +144,7 @@
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
-
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -223,7 +221,7 @@
                 android:layout_margin="5dp"
                 app:cardElevation="5dp"
                 app:cardCornerRadius="20dp"
-                app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                 <LinearLayout
@@ -301,7 +299,7 @@
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout
@@ -379,8 +377,7 @@
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
-
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -457,7 +454,7 @@
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout
@@ -536,8 +533,7 @@
                     android:layout_margin="5dp"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
-
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
                     <LinearLayout
                         android:layout_width="match_parent"

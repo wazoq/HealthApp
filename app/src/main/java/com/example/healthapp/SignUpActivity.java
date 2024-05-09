@@ -3,7 +3,9 @@ package com.example.healthapp;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,6 +49,16 @@ public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean themecheck = sharedPreferences.getBoolean("Light", false);
+        if(themecheck)
+        {
+            setTheme(R.style.Base_Theme_HealthApp);
+        }
+        else {
+            setTheme(R.style.Base_Theme_HealthAppNight);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 

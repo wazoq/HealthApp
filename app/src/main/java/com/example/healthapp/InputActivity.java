@@ -1,6 +1,8 @@
 package com.example.healthapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +47,16 @@ public class InputActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean themecheck = sharedPreferences.getBoolean("Light", false);
+        if(themecheck)
+        {
+            setTheme(R.style.Base_Theme_HealthApp);
+        }
+        else {
+            setTheme(R.style.Base_Theme_HealthAppNight);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
 

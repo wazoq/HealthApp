@@ -8,6 +8,13 @@
         <item name="android:windowBackground">#1c263d</item>
         <item name="backgroundColor">#192136</item>
         <item name="android:textColor">#888</item>
-        <!-- Add other dark mode specific attributes -->
+        <!-- Customize button style to make them appear as ovals -->
+        <item name="buttonStyle">@style/OvalButton</item>
+    </style>
+
+    <!-- Define the oval button style -->
+    <style name="OvalButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+
     </style>
 </resources>

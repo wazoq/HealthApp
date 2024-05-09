@@ -10,7 +10,6 @@
     android:padding="16dp"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/screen_background"
     tools:context=".MainActivity">
 
     <!-- Makes entry box for user to enter the number-->

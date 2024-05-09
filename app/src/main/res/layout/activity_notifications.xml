@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    android:background="@color/screen_background"
     tools:context=".NotificationsActivity">
 
     <LinearLayout
@@ -49,7 +48,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/screen_background"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
