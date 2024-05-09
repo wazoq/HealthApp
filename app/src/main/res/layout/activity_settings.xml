@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="top"
-    android:background="@color/screen_background"
     tools:context=".SettingsActivity">
 
     <LinearLayout
@@ -75,19 +74,18 @@
         android:paddingBottom="16dp">
 
         <TextView
-            android:id="@+id/darkmodeText"
+            android:id="@+id/lightmodeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="Dark Mode"
+            android:text="Light Mode"
             android:textColor="@color/text1"
             android:layout_gravity="center"
             android:typeface="monospace"
-            android:layout_margin="10dp"
-            android:onClick="onClickLogout"/>
+            android:layout_margin="10dp" />
 
         <Switch
-            android:id="@+id/darkModeSwitch"
+            android:id="@+id/lightModeSwitch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"

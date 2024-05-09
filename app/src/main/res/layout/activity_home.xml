@@ -9,8 +9,9 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
 android:gravity="center"
-android:background="@color/screen_background"
 tools:context=".HomeActivity">
+
+
 
     <LinearLayout
     android:layout_width="match_parent"
@@ -63,7 +64,6 @@ tools:context=".HomeActivity">
             android:layout_gravity="center"
             android:paddingBottom="25dp"
             android:text="Participation Year 2024"
-            android:textColor="@color/text1"
             android:textSize="20sp"
             android:typeface="monospace"/>
 
@@ -93,7 +93,6 @@ tools:context=".HomeActivity">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Welcome"
-                android:textColor="@color/text1"
                 android:gravity="center"
                 android:textSize="35sp"
                 android:textStyle="bold"
@@ -170,8 +169,7 @@ tools:context=".HomeActivity">
                 android:textSize="20dp"
                 android:layout_margin="10dp"
                 android:gravity="center_horizontal"
-                android:layout_gravity="start"
-                android:textColor="@color/text1"/>
+                android:layout_gravity="start" />
 
 
 
@@ -231,7 +229,6 @@ tools:context=".HomeActivity">
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Running"
-                                android:textColor="@color/text1"
                                 android:textSize="16sp"
                                 android:typeface="monospace" />
 
@@ -299,7 +296,6 @@ tools:context=".HomeActivity">
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Walking"
-                                android:textColor="@color/text1"
                                 android:textSize="15sp"
                                 android:typeface="monospace" />
 
@@ -374,7 +370,6 @@ tools:context=".HomeActivity">
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Weights"
-                                android:textColor="@color/text1"
                                 android:textSize="16sp"
                                 android:typeface="monospace" />
 
@@ -441,7 +436,6 @@ tools:context=".HomeActivity">
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Yoga"
-                                android:textColor="@color/text1"
                                 android:textSize="16sp"
                                 android:typeface="monospace" />
 
@@ -516,7 +510,6 @@ tools:context=".HomeActivity">
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Stairs"
-                                android:textColor="@color/text1"
                                 android:textSize="16sp"
                                 android:typeface="monospace" />
 
@@ -583,7 +576,6 @@ tools:context=".HomeActivity">
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Total"
-                                android:textColor="@color/text1"
                                 android:textSize="16sp"
                                 android:typeface="monospace" />
 

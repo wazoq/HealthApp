@@ -291,12 +291,15 @@ package com.example.healthapp;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
@@ -323,6 +326,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -330,22 +334,39 @@ import java.util.Map;
 public class SettingsActivity extends AppCompatActivity {
 
     Boolean darkMode;
+    private Switch Switch;
+    boolean nightMode;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     Boolean notifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        boolean themecheck = sharedPreferences.getBoolean("Light", false);
+        if(themecheck)
+        {
+            setTheme(R.style.Base_Theme_HealthApp);
+        }
+        else {
+            setTheme(R.style.Base_Theme_HealthAppNight);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Switch = findViewById(R.id.lightModeSwitch);
+        Switch.setChecked(sharedPreferences.getBoolean("Light", false));
 
-        Switch darkModeSwitch = findViewById(R.id.darkModeSwitch);
-        darkModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+
+        Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    darkMode = true;
-                } else {
-                    darkMode = false;
-                }
+                editor.putBoolean("Light", isChecked);
+                editor.apply();
             }
         });
 
@@ -392,7 +413,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
         updateScreenName();
+
+
     }
+
+
 
     public void updateScreenName() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();

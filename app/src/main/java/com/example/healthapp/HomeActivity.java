@@ -2,7 +2,9 @@ package com.example.healthapp;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomeActivity extends AppCompatActivity {
+
 
 //    TextView quoteBox = findViewById(R.id.quote);
 //test
