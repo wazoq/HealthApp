@@ -189,7 +189,7 @@ tools:context=".HomeActivity">
                     android:layout_weight="1"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -255,7 +255,7 @@ tools:context=".HomeActivity">
                     android:layout_weight="1"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout
@@ -329,7 +329,7 @@ tools:context=".HomeActivity">
                     android:layout_weight="1"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout
@@ -395,7 +395,7 @@ tools:context=".HomeActivity">
                     android:layout_weight="1"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout
@@ -469,7 +469,7 @@ tools:context=".HomeActivity">
                     android:layout_weight="1"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout
@@ -535,7 +535,7 @@ tools:context=".HomeActivity">
                     android:layout_weight="1"
                     app:cardElevation="5dp"
                     app:cardCornerRadius="20dp"
-                    app:cardBackgroundColor="@color/card_background">
+                    app:cardBackgroundColor="?attr/backgroundColor">
 
 
                     <LinearLayout

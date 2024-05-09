@@ -8,6 +8,13 @@
         <item name="backgroundColor">#931842</item>
         <item name="android:textColor">#430118</item>
 
-        <!-- Add other light mode specific attributes -->
+        <item name="buttonStyle">@style/OvalButton</item>
     </style>
+
+    <!-- Define the oval button style -->
+    <style name="OvalButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+
+    </style>
+        <!-- Add other light mode specific attributes -->
 </resources>

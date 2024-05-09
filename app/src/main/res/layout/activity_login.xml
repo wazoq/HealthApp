@@ -9,7 +9,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/screen_background"
     tools:context=".LoginActivity">
 
 
@@ -83,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
         android:radius="0dp"
-        android:backgroundTint="@android:color/transparent"
+        android:backgroundTint="?attr/backgroundColor"
         android:text="Forgot Password?"
         android:textSize="12dp"
         android:layout_gravity="center"
