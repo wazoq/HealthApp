@@ -367,6 +367,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 editor.putBoolean("Light", isChecked);
                 editor.apply();
+                recreate();
             }
         });
 

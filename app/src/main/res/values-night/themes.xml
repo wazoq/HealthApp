@@ -4,12 +4,15 @@
         <!-- Customize your dark mode theme here -->
         <item name="colorPrimary">#000</item>
         <item name="windowNoTitle">true</item>
-
+        <item name="colorAccent">#888</item>
         <item name="android:windowBackground">#1c263d</item>
         <item name="backgroundColor">#192136</item>
         <item name="android:textColor">#888</item>
+        <item name="android:textColorSecondary">#3e465a</item>
+        <item name="colorSecondary">#3e465a</item>
         <!-- Customize button style to make them appear as ovals -->
         <item name="buttonStyle">@style/OvalButton</item>
+
     </style>
 
     <!-- Define the oval button style -->

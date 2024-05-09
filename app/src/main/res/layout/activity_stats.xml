@@ -23,7 +23,6 @@
             android:gravity="center"
             android:text="Stats"
             android:typeface="monospace"
-            android:textColor="@color/text1"
             android:textSize="35dp" />
 
     </LinearLayout>
@@ -184,7 +183,6 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="start"
                                 android:text="Running"
-                                android:textColor="@color/text1"
                                 android:textSize="25sp"
                                 android:typeface="monospace" />
 
@@ -263,7 +261,6 @@
                             android:gravity="start"
                             android:text="Walking"
                             android:typeface="monospace"
-                            android:textColor="@color/text1"
                             android:textSize="25sp" />
 
                         <TextView
@@ -341,7 +338,6 @@
                                 android:gravity="start"
                                 android:text="Weight Lifting"
                                 android:typeface="monospace"
-                                android:textColor="@color/text1"
                                 android:textSize="25sp" />
 
                             <TextView
@@ -418,7 +414,6 @@
                                 android:gravity="start"
                                 android:text="Yoga"
                                 android:typeface="monospace"
-                                android:textColor="@color/text1"
                                 android:textSize="25sp" />
 
                             <TextView
@@ -496,7 +491,6 @@
                                 android:gravity="start"
                                 android:text="Stairs"
                                 android:typeface="monospace"
-                                android:textColor="@color/text1"
                                 android:textSize="25sp" />
 
                             <TextView
@@ -574,7 +568,6 @@
                                 android:gravity="start"
                                 android:text="Total"
                                 android:typeface="monospace"
-                                android:textColor="@color/text1"
                                 android:textSize="25sp" />
 
                             <TextView

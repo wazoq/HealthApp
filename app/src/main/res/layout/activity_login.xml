@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
         android:radius="0dp"
-        android:backgroundTint="?attr/backgroundColor"
+        android:background="@android:color/transparent"
         android:text="Forgot Password?"
         android:textSize="12dp"
         android:layout_gravity="center"

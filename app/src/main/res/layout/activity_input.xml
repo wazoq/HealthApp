@@ -35,7 +35,6 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:text="Type"
-            android:textColor="@color/text1"
             android:layout_gravity="center"
             android:typeface="monospace"
             android:layout_margin="10dp"/>
@@ -65,8 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="For How Many Minutes?"
-            android:textColorHint="@color/text1"
-            android:textColor="@color/text1"
+            android:textColorHint="?attr/colorAccent"
             android:maxLines="1"
             android:inputType="number"
             android:layout_margin="10dp"/>
@@ -76,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/text2"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Submit"
             android:onClick="onClickSubmit"
             android:gravity="center" />

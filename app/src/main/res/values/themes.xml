@@ -5,8 +5,11 @@
         <item name="colorPrimary">#444</item>
         <item name="android:windowBackground">#C8D1E6</item>
         <item name="windowNoTitle">true</item>
-        <item name="backgroundColor">#931842</item>
-        <item name="android:textColor">#430118</item>
+        <item name="backgroundColor">#FAF9F6</item>
+        <item name="colorAccent">#000</item>
+        <item name="android:textColor">#1C263D</item>
+        <item name="android:textColorSecondary">#3e465a</item>
+        <item name="colorSecondary">#D3D3D3</item>
 
         <item name="buttonStyle">@style/OvalButton</item>
     </style>
