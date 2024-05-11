@@ -104,15 +104,15 @@ public class NotificationsActivity extends AppCompatActivity {
                     // Handle success if needed
 
                     //FCMSend.pushNotification();
-                    Toast.makeText(NotificationsActivity.this, "newNoti boolean changed false.",
-                            Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(NotificationsActivity.this, "newNoti boolean changed false.",
+                    //        Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     // Handle errors
                     if (e != null) {
                         // Handle exceptions
-                        Toast.makeText(NotificationsActivity.this, "newNoti boolean change failed.",
-                                Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(NotificationsActivity.this, "newNoti boolean change failed.",
+                      //          Toast.LENGTH_SHORT).show();
                     }
                 });
 
