@@ -35,6 +35,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
@@ -69,6 +71,26 @@ public class HomeActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
                     PackageManager.PERMISSION_GRANTED) {
+
+
+
+
+                FirebaseMessaging.getInstance().subscribeToTopic("pushNotis")
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = "Subscribed";
+                                if (!task.isSuccessful()) {
+                                    msg = "Subscribe failed";
+                                }
+                                Log.d(TAG, msg);
+                                Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+
+
                 // FCM SDK (and your app) can post notifications.
             } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 // TODO: display an educational UI explaining to the user the features that will be enabled
@@ -104,18 +126,14 @@ public class HomeActivity extends AppCompatActivity {
         checkNewNoti();
     }
 
-    public void updateData() {
-        // Get today's date in the format "MM-DD-YYYY"
-        String todayDate = getCurrentDate();
-        AtomicInteger total = new AtomicInteger();
+    public void updateBox(String taskC, TextView textViewBox, AtomicInteger total, String todayDate) {
 
+        // Get document "Running" from the collection
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = user.getEmail();
         CollectionReference collectionReference = firestore.collection(userEmail);
-
-        // Get document "Running" from the collection
-        collectionReference.document("Running").get().addOnCompleteListener(task -> {
+        collectionReference.document(taskC).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
@@ -131,183 +149,42 @@ public class HomeActivity extends AppCompatActivity {
                             if (value != null) {
                                 // Update the TextView with the value
                                 runOnUiThread(() -> {
-                                    TextView runningText = findViewById(R.id.RunningText);
-                                    runningText.setText(value.toString() + " Minutes");
+                                    textViewBox.setText(value.toString() + " Minutes");
                                     int intValue = Integer.parseInt(value.toString());
                                     total.addAndGet(intValue);
                                 });
                             }
                         } else {
                             // Today's date is not present in the document
-                            // Handle this case accordingly
-                            Log.d(TAG, "Today's date is not present in the document");
+                            // Log.d(TAG, "Today's date is not present in the document");
                         }
                     }
                 } else {
-                    Log.d(TAG, "Document 'Running' does not exist");
+                    Log.d(TAG, "Document 'taskC' does not exist");
                 }
             } else {
                 Log.d(TAG, "Failed to retrieve document 'Running'", task.getException());
             }
             checkTasksCompleted(total.get());
         });
+    }
 
-        collectionReference.document("Walking").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
-                    Map<String, Object> data = document.getData();
-                    if (data != null) {
-                        // Check if today's date exists as a field in the document
-                        if (data.containsKey(todayDate)) {
-                            // Retrieve the value associated with today's date
-                            Object value = data.get(todayDate);
-                            // Handle the value as needed
-                            // For example:
-                            if (value != null) {
+    public void updateData() {
+        // Get today's date in the format "MM-DD-YYYY"
+        String todayDate = getCurrentDate();
+        AtomicInteger total = new AtomicInteger();
 
-                                runOnUiThread(() -> {
-                                    TextView walking_text = findViewById(R.id.WalkingText);
-                                    walking_text.setText(value.toString() + " Minutes");
-                                    int intValue = Integer.parseInt(value.toString());
-                                    total.addAndGet(intValue);
-                                });
+        TextView runningText = findViewById(R.id.RunningText);
+        TextView walkingText = findViewById(R.id.WalkingText);
+        TextView weightText = findViewById(R.id.weightliftingText);
+        TextView yogaText = findViewById(R.id.yogaText);
+        TextView stairsText = findViewById(R.id.stairsText);
 
-                            }
-                        } else {
-                            // Today's date is not present in the document
-                            // Handle this case accordingly
-                            Log.d(TAG, "Today's date is not present in the document");
-                        }
-                    }
-                } else {
-                    Log.d(TAG, "Document 'Walking' does not exist");
-                }
-            } else {
-                Log.d(TAG, "Failed to retrieve document 'Walking'", task.getException());
-            }
-            checkTasksCompleted(total.get());
-        });
-
-        collectionReference.document("Weight Lifting").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
-                    Map<String, Object> data = document.getData();
-                    if (data != null) {
-                        // Check if today's date exists as a field in the document
-                        if (data.containsKey(todayDate)) {
-                            // Retrieve the value associated with today's date
-                            Object value = data.get(todayDate);
-                            // Handle the value as needed
-                            // For example:
-                            if (value != null) {
-
-                                runOnUiThread(() -> {
-                                    TextView weights_text = findViewById(R.id.weightliftingText);
-                                    weights_text.setText(value.toString() + " Minutes");
-                                    int intValue = Integer.parseInt(value.toString());
-                                    total.addAndGet(intValue);
-                                });
-
-
-                                // Update the TextView with the value
-
-                            }
-                        } else {
-                            // Today's date is not present in the document
-                            // Handle this case accordingly
-                            Log.d(TAG, "Today's date is not present in the document");
-                        }
-                    }
-                } else {
-                    Log.d(TAG, "Document 'Weight Lifting' does not exist");
-                }
-            } else {
-                Log.d(TAG, "Failed to retrieve document 'Weight Lifting'", task.getException());
-            }
-            checkTasksCompleted(total.get());
-        });
-
-        collectionReference.document("Yoga").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
-                    Map<String, Object> data = document.getData();
-                    if (data != null) {
-                        // Check if today's date exists as a field in the document
-                        if (data.containsKey(todayDate)) {
-                            // Retrieve the value associated with today's date
-                            Object value = data.get(todayDate);
-                            // Handle the value as needed
-                            // For example:
-                            if (value != null) {
-
-                                runOnUiThread(() -> {
-                                    TextView yoga_text = findViewById(R.id.yogaText);
-                                    yoga_text.setText(value.toString() + " Minutes");
-                                    int intValue = Integer.parseInt(value.toString());
-                                    total.addAndGet(intValue);
-                                });
-
-
-                                // Update the TextView with the value
-
-                            }
-                        } else {
-                            // Today's date is not present in the document
-                            // Handle this case accordingly
-                            Log.d(TAG, "Today's date is not present in the document");
-                        }
-                    }
-                } else {
-                    Log.d(TAG, "Document 'Yoga' does not exist");
-                }
-            } else {
-                Log.d(TAG, "Failed to retrieve document 'Yoga'", task.getException());
-            }
-            checkTasksCompleted(total.get());
-        });
-
-        collectionReference.document("Stairs").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
-                    Map<String, Object> data = document.getData();
-                    if (data != null) {
-                        // Check if today's date exists as a field in the document
-                        if (data.containsKey(todayDate)) {
-                            // Retrieve the value associated with today's date
-                            Object value = data.get(todayDate);
-                            // Handle the value as needed
-                            // For example:
-                            if (value != null) {
-
-                                runOnUiThread(() -> {
-                                    TextView stairs_text = findViewById(R.id.stairsText);
-                                    stairs_text.setText(value.toString() + " Minutes");
-                                    int intValue = Integer.parseInt(value.toString());
-                                    total.addAndGet(intValue);
-                                });
-                            }
-                        } else {
-                            // Today's date is not present in the document
-                            // Handle this case accordingly
-                            Log.d(TAG, "Today's date is not present in the document");
-                        }
-                    }
-                } else {
-                    Log.d(TAG, "Document 'Stairs' does not exist");
-                }
-            } else {
-                Log.d(TAG, "Failed to retrieve document 'Stairs'", task.getException());
-            }
-            checkTasksCompleted(total.get());
-        });
+        updateBox("Running", runningText, total, todayDate);
+        updateBox("Walking", walkingText, total, todayDate);
+        updateBox("Weight Lifting", weightText, total, todayDate);
+        updateBox("Yoga", yogaText, total, todayDate);
+        updateBox("Stairs", stairsText, total, todayDate);
     }
 
     private String getCurrentDate() {

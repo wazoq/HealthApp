@@ -1,6 +1,5 @@
 package com.example.healthapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,21 +9,13 @@ import android.widget.Toast;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -122,14 +113,14 @@ public class SendNotificationActivity extends AppCompatActivity {
                                         // Handle success if needed
 
                                         //FCMSend.pushNotification();
-                                        Toast.makeText(SendNotificationActivity.this, "Noti Sent.",
+                                        Toast.makeText(SendNotificationActivity.this, "Notification Sent.",
                                                 Toast.LENGTH_SHORT).show();
                                     })
                                     .addOnFailureListener(e -> {
                                         // Handle errors
                                         if (e != null) {
                                             // Handle exceptions
-                                            Toast.makeText(SendNotificationActivity.this, "Noti Failed.",
+                                            Toast.makeText(SendNotificationActivity.this, "Notification Failed.",
                                                     Toast.LENGTH_SHORT).show();
                                         }
                                     });
@@ -141,15 +132,15 @@ public class SendNotificationActivity extends AppCompatActivity {
                                         // Handle success if needed
 
                                         //FCMSend.pushNotification();
-                                        Toast.makeText(SendNotificationActivity.this, "newNoti boolean added.",
-                                                Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(SendNotificationActivity.this, "newNoti boolean added.",
+                                        //        Toast.LENGTH_SHORT).show();
                                     })
                                     .addOnFailureListener(e -> {
                                         // Handle errors
                                         if (e != null) {
                                             // Handle exceptions
-                                            Toast.makeText(SendNotificationActivity.this, "newNoti boolean failed.",
-                                                    Toast.LENGTH_SHORT).show();
+                                          //  Toast.makeText(SendNotificationActivity.this, "newNoti boolean failed.",
+                                          //          Toast.LENGTH_SHORT).show();
                                         }
                                     });
 
@@ -170,6 +161,36 @@ public class SendNotificationActivity extends AppCompatActivity {
                         }
                     });
         }
+
+
+//        // This registration token comes from the client FCM SDKs.
+//        String registrationToken = "YOUR_REGISTRATION_TOKEN";
+//
+//        // See documentation on defining a message payload.
+//                Message message = Message.builder()
+//                        .putData("score", "850")
+//                        .putData("time", "2:45")
+//                        .setToken(registrationToken)
+//                        .build();
+//
+//        // Send a message to the device corresponding to the provided
+//        // registration token.
+//                String response = FirebaseMessaging.getInstance().send(message);
+//        // Response is a message ID string.
+//        System.out.println("Successfully sent message: " + response);
+
+        sendNotificationToTopic(messageText);
+    }
+
+    private void sendNotificationToTopic(String messageText) {
+        // Construct the notification message
+        Map<String, String> data = new HashMap<>();
+        data.put("message", messageText);
+
+        // Send the notification to the topic
+        FirebaseMessaging.getInstance().send(new RemoteMessage.Builder("pushNotis")
+                .setData(data)
+                .build());
     }
 
 
