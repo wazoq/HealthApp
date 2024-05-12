@@ -61,6 +61,7 @@ public class HomeActivity extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     // FCM SDK (and your app) can post notifications.
+                    FirebaseMessaging.getInstance().subscribeToTopic("all");
                 } else {
                     // TODO: Inform user that that your app will not show notifications.
                 }
@@ -71,24 +72,6 @@ public class HomeActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
                     PackageManager.PERMISSION_GRANTED) {
-
-
-
-
-                FirebaseMessaging.getInstance().subscribeToTopic("pushNotis")
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = "Subscribed";
-                                if (!task.isSuccessful()) {
-                                    msg = "Subscribe failed";
-                                }
-                                Log.d(TAG, msg);
-                                Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-
 
 
                 // FCM SDK (and your app) can post notifications.

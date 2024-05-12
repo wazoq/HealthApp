@@ -28,8 +28,80 @@ import java.util.Map;
 
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+
+
+
+
+
+
+
+
+
+
 
 public class SendNotificationActivity extends AppCompatActivity {
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // FCM SDK (and your app) can post notifications.
+                } else {
+                    // TODO: Inform user that that your app will not show notifications.
+                }
+            });
+
+//    private void askNotificationPermission() {
+//        // This is only necessary for API level >= 33 (TIRAMISU)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
+//                    PackageManager.PERMISSION_GRANTED) {
+//
+//                // FCM SDK (and your app) can post notifications.
+//            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
+//                // TODO: display an educational UI explaining to the user the features that will be enabled
+//                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+//                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+//                //       If the user selects "No thanks," allow the user to continue without notifications.
+//            } else {
+//                // Directly ask for the permission
+//                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+//            }
+//        }
+//    }
+
+    private void askNotificationPermission() {
+        // Check if the app has notification permission
+        if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
+            // Request notification permission
+            Intent intent = new Intent();
+            intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+            intent.putExtra("app_package", getPackageName());
+            intent.putExtra("app_uid", getApplicationInfo().uid);
+            startActivity(intent);
+        }
+    }
+
 
     FirebaseFirestore firestore;
     String[] emailArray = {};
@@ -39,6 +111,110 @@ public class SendNotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_notification);
         getEmails();
+        askNotificationPermission();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            String usertoken = task.getResult();
+                            Log.d("tooooo", "token: " + usertoken);
+                        } else {
+                            Log.e("Error", "Fetching FCM registration token failed", task.getException());
+                        }
+                    }
+                });
+
+
+
+
+
+        EditText title = findViewById(R.id.titleId);
+        EditText message = findViewById(R.id.messageId);
+        EditText token = findViewById(R.id.tokenId);
+
+        findViewById(R.id.alldeviceId).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (!title.getText().toString().isEmpty() && !message.getText().toString().isEmpty()) {
+
+                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+                            title.getText().toString(),
+                            message.getText().toString(), getApplicationContext(), SendNotificationActivity.this);
+                    notificationsSender.SendNotifications();
+
+                }
+                else {
+                    Toast.makeText(SendNotificationActivity.this, "Write some text", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        findViewById(R.id.singledeviceId).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (!title.getText().toString().isEmpty() && !message.getText().toString().isEmpty()
+                        && !token.getText().toString().isEmpty()) {
+
+                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender(token.getText().toString(),
+                            title.getText().toString(),
+                            message.getText().toString(), getApplicationContext(), SendNotificationActivity.this);
+                    notificationsSender.SendNotifications();
+                }
+                else {
+                    Toast.makeText(SendNotificationActivity.this, "Enter token", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void onClickBack(View view) {
@@ -179,19 +355,32 @@ public class SendNotificationActivity extends AppCompatActivity {
 //        // Response is a message ID string.
 //        System.out.println("Successfully sent message: " + response);
 
-        sendNotificationToTopic(messageText);
+        //sendNotificationToTopic(messageText);
+
+
+
+
+
     }
 
-    private void sendNotificationToTopic(String messageText) {
-        // Construct the notification message
-        Map<String, String> data = new HashMap<>();
-        data.put("message", messageText);
 
-        // Send the notification to the topic
-        FirebaseMessaging.getInstance().send(new RemoteMessage.Builder("pushNotis")
-                .setData(data)
-                .build());
-    }
+
+
+
+
+
+
+
+//    private void sendNotificationToTopic(String messageText) {
+//        // Construct the notification message
+//        Map<String, String> data = new HashMap<>();
+//        data.put("message", messageText);
+//
+//        // Send the notification to the topic
+//        FirebaseMessaging.getInstance().send(new RemoteMessage.Builder("pushNotis")
+//                .setData(data)
+//                .build());
+//    }
 
 
 
