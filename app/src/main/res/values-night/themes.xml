@@ -1,23 +1,28 @@
+
+
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Theme for night mode -->
-    <style name="Base.Theme.HealthAppNight" parent="Theme.AppCompat">
-        <!-- Customize your dark mode theme here -->
-        <item name="colorPrimary">#000</item>
-        <item name="windowNoTitle">true</item>
-        <item name="colorAccent">#888</item>
-        <item name="android:windowBackground">#1c263d</item>
-        <item name="backgroundColor">#192136</item>
-        <item name="android:textColor">#888</item>
-        <item name="android:textColorSecondary">#3e465a</item>
-        <item name="colorSecondary">#3e465a</item>
-        <!-- Customize button style to make them appear as ovals -->
-        <item name="buttonStyle">@style/OvalButton</item>
+<!-- Base application theme -->
+<style name="Base.Theme.HealthAppNight" parent="Theme.AppCompat">
+    <!-- Customize your light mode theme here -->
+    <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    <item name="colorPrimary">#444</item>
+    <item name="android:windowBackground">#C8D1E6</item>
+    <item name="windowNoTitle">true</item>
+    <item name="backgroundColor">#FAF9F6</item>
+    <item name="colorAccent">#000</item>
+    <item name="android:textColor">#1C263D</item>
+    <item name="android:textColorSecondary">#3e465a</item>
+    <item name="colorSecondary">#D3D3D3</item>
 
-    </style>
 
-    <!-- Define the oval button style -->
-    <style name="OvalButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button</item>
+    <item name="buttonStyle">@style/OvalButton</item>
+</style>
 
-    </style>
+<!-- Define the oval button style -->
+<style name="OvalButton" parent="Widget.AppCompat.Button">
+    <item name="android:background">@drawable/button</item>
+
+</style>
+<!-- Add other light mode specific attributes -->
 </resources>
+

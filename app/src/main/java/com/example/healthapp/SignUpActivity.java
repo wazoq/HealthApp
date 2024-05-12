@@ -53,10 +53,10 @@ public class SignUpActivity extends AppCompatActivity {
         boolean themecheck = sharedPreferences.getBoolean("Light", false);
         if(themecheck)
         {
-            setTheme(R.style.Base_Theme_HealthApp);
+            setTheme(R.style.Base_Theme_HealthAppNight);
         }
         else {
-            setTheme(R.style.Base_Theme_HealthAppNight);
+            setTheme(R.style.Base_Theme_HealthApp);
         }
 
         super.onCreate(savedInstanceState);
