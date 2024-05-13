@@ -80,7 +80,7 @@
         android:onClick="onClickSend"/>
 
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
@@ -130,7 +130,7 @@
             android:textSize="25dp"
             android:text="Send all devices" />
     </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 
 
 

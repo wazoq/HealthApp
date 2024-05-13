@@ -120,64 +120,64 @@ public class SendNotificationActivity extends AppCompatActivity {
 
 
 
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (task.isSuccessful() && task.getResult() != null) {
-                            String usertoken = task.getResult();
-                            Log.d("tooooo", "token: " + usertoken);
-                        } else {
-                            Log.e("Error", "Fetching FCM registration token failed", task.getException());
-                        }
-                    }
-                });
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        if (task.isSuccessful() && task.getResult() != null) {
+//                            String usertoken = task.getResult();
+//                            Log.d("tooooo", "token: " + usertoken);
+//                        } else {
+//                            Log.e("Error", "Fetching FCM registration token failed", task.getException());
+//                        }
+//                    }
+//                });
 
 
 
 
 
-        EditText title = findViewById(R.id.titleId);
-        EditText message = findViewById(R.id.messageId);
-        EditText token = findViewById(R.id.tokenId);
+//        EditText title = findViewById(R.id.titleId);
+//        EditText message = findViewById(R.id.messageId);
+//        EditText token = findViewById(R.id.tokenId);
+//
+//        findViewById(R.id.alldeviceId).setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                if (!title.getText().toString().isEmpty() && !message.getText().toString().isEmpty()) {
+//
+//                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+//                            title.getText().toString(),
+//                            message.getText().toString(), getApplicationContext(), SendNotificationActivity.this);
+//                    notificationsSender.SendNotifications();
+//
+//                }
+//                else {
+//                    Toast.makeText(SendNotificationActivity.this, "Write some text", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
-        findViewById(R.id.alldeviceId).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (!title.getText().toString().isEmpty() && !message.getText().toString().isEmpty()) {
-
-                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
-                            title.getText().toString(),
-                            message.getText().toString(), getApplicationContext(), SendNotificationActivity.this);
-                    notificationsSender.SendNotifications();
-
-                }
-                else {
-                    Toast.makeText(SendNotificationActivity.this, "Write some text", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        findViewById(R.id.singledeviceId).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                if (!title.getText().toString().isEmpty() && !message.getText().toString().isEmpty()
-                        && !token.getText().toString().isEmpty()) {
-
-                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender(token.getText().toString(),
-                            title.getText().toString(),
-                            message.getText().toString(), getApplicationContext(), SendNotificationActivity.this);
-                    notificationsSender.SendNotifications();
-                }
-                else {
-                    Toast.makeText(SendNotificationActivity.this, "Enter token", Toast.LENGTH_LONG).show();
-                }
-            }
-
-        });
+//        findViewById(R.id.singledeviceId).setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                if (!title.getText().toString().isEmpty() && !message.getText().toString().isEmpty()
+//                        && !token.getText().toString().isEmpty()) {
+//
+//                    FcmNotificationsSender notificationsSender = new FcmNotificationsSender(token.getText().toString(),
+//                            title.getText().toString(),
+//                            message.getText().toString(), getApplicationContext(), SendNotificationActivity.this);
+//                    notificationsSender.SendNotifications();
+//                }
+//                else {
+//                    Toast.makeText(SendNotificationActivity.this, "Enter token", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//        });
 
 
 
@@ -256,6 +256,9 @@ public class SendNotificationActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         EditText messageEditText = findViewById(R.id.message);
         String messageText = messageEditText.getText().toString();
+        Date currentDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
+        String formattedDate = sdf.format(currentDate);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         // String userEmail = user.getEmail();
@@ -267,9 +270,9 @@ public class SendNotificationActivity extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                             int fieldCount = documentSnapshot.getData().size();
                             //String temp = "noti" + (fieldCount + 1);
-                            Date currentDate = new Date();
-                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
-                            String formattedDate = sdf.format(currentDate);
+//                            Date currentDate = new Date();
+//                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
+//                            String formattedDate = sdf.format(currentDate);
                             firestore.collection(userEmail).document("Notis")
                                     .update(formattedDate, messageText)
                                     .addOnSuccessListener(aVoid -> {
@@ -344,6 +347,20 @@ public class SendNotificationActivity extends AppCompatActivity {
 //        System.out.println("Successfully sent message: " + response);
 
         //sendNotificationToTopic(messageText);
+
+
+//        EditText title = findViewById(R.id.titleId);
+//        EditText message = findViewById(R.id.messageId);
+//        EditText token = findViewById(R.id.tokenId);
+
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+                formattedDate,
+                messageText, getApplicationContext(), SendNotificationActivity.this);
+        notificationsSender.SendNotifications();
+
+
+
+
 
 
 
