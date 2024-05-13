@@ -17,80 +17,10 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-
-     NotificationManager mNotificationManager;
-
-
-//    @Override
-//    public void onMessageReceived(RemoteMessage remoteMessage) {
-//        super.onMessageReceived(remoteMessage);
-//
-//
-//// playing audio and vibration when user se reques
-//        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-//        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-//        r.play();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//            r.setLooping(false);
-//        }
-//
-//        // vibration
-//        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-//        long[] pattern = {100, 300, 300, 300};
-//        v.vibrate(pattern, -1);
-//
-//
-//        int resourceImage = getResources().getIdentifier(remoteMessage.getNotification().getIcon(), "drawable", getPackageName());
-//
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID");
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-////            builder.setSmallIcon(R.drawable.icontrans);
-//            builder.setSmallIcon(resourceImage);
-//        } else {
-////            builder.setSmallIcon(R.drawable.icon_kritikar);
-//            builder.setSmallIcon(resourceImage);
-//        }
-//
-//
-//
-//        Intent resultIntent = new Intent(this, MainActivity.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_IMMUTABLE);
-//
-//
-//        builder.setContentTitle(remoteMessage.getNotification().getTitle());
-//        builder.setContentText(remoteMessage.getNotification().getBody());
-//        builder.setContentIntent(pendingIntent);
-//        builder.setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getNotification().getBody()));
-//        builder.setAutoCancel(true);
-//        builder.setPriority(Notification.PRIORITY_MAX);
-//
-//        mNotificationManager =
-//                (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//
-//
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-//        {
-//            String channelId = "Your_channel_id";
-//            NotificationChannel channel = new NotificationChannel(
-//                    channelId,
-//                    "Channel human readable title",
-//                    NotificationManager.IMPORTANCE_HIGH);
-//            mNotificationManager.createNotificationChannel(channel);
-//            builder.setChannelId(channelId);
-//        }
-//
-//
-//
-//// notificationId is a unique int for each notification that you must define
-//        mNotificationManager.notify(100, builder.build());
-//
-//
-//
-//    }
-
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -131,12 +61,16 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
 
+        Date currentDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
+        String formattedDate = sdf.format(currentDate);
+
         String channelId = "My Channel ID";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("New Notification")
+                        .setContentTitle(formattedDate)
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
