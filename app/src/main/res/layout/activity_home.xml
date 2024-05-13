@@ -75,7 +75,7 @@ tools:context=".HomeActivity">
         android:background="@drawable/border"
         android:layout_marginBottom="15dp">
 
-        <!-- Left half of the layout (you can add other elements here if needed) -->
+        <!-- Left half of the layout -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -83,7 +83,6 @@ tools:context=".HomeActivity">
             android:layout_margin="10dp"
             android:orientation="vertical"
             android:gravity="center">
-            <!-- Placeholder or additional content can go here -->
 
 
             <!-- Box displaying the day underneath the month -->
@@ -122,7 +121,7 @@ tools:context=".HomeActivity">
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <!-- Box displaying the day underneath the month -->
+            <!-- Box displaying the day under the month -->
             <TextView
                 android:id="@+id/dayText"
                 android:layout_width="wrap_content"
@@ -135,31 +134,6 @@ tools:context=".HomeActivity">
                 android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </LinearLayout>
-
-
-
-    <!-- Second horizontal LinearLayout -->
-        <!--<LinearLayout
-            android:elevation="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="4"
-            android:background="@drawable/border"
-            android:layout_marginBottom="15dp">
-
-            <TextView
-                android:id="@+id/quote"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Could put todays activity or add quote of the day using api"
-                >
-            </TextView>
-        </LinearLayout>-->
-
-        <!-- Third horizontal LinearLayout -->
-
 
             <TextView
                 android:layout_width="match_parent"
