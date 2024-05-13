@@ -76,7 +76,8 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String username,password,name;
-                username = String.valueOf(usernameEditText.getText());
+                String usernameCap = String.valueOf(usernameEditText.getText());
+                username = usernameCap.toLowerCase();
                 password = String.valueOf(passwordEditText.getText());
                 name = String.valueOf(nameEditText.getText());
 

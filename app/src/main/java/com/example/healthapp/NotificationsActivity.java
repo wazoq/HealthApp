@@ -3,6 +3,7 @@ package com.example.healthapp;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -35,6 +36,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class NotificationsActivity extends AppCompatActivity {
 
@@ -190,11 +196,7 @@ public class NotificationsActivity extends AppCompatActivity {
             fieldTextView.setOnTouchListener(new OnSwipeTouchListener(this) {
                 public void onSwipeLeft() {
                     // Handle swipe left action (delete notification)
-                    deleteNotification(fieldValue);
-                }
-                public void onSwipeRight() {
-                    // Handle swipe left action (delete notification)
-                    //deleteNotification(fieldValue);
+                    showDeleteConfirmationDialog(fieldValue);
                 }
             });
 
@@ -230,6 +232,30 @@ public class NotificationsActivity extends AppCompatActivity {
     public void onClickBack(View view) {
         Intent intent = new Intent(NotificationsActivity.this, HomeActivity.class);
         startActivity(intent);
+    }
+
+    private void showDeleteConfirmationDialog(String fieldValue) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete");
+
+        // Set up the message
+        builder.setMessage("Are you sure you want to delete this?");
+
+        // Set up the buttons
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteNotification(fieldValue);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
 
