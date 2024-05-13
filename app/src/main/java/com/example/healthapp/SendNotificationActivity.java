@@ -62,35 +62,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class SendNotificationActivity extends AppCompatActivity {
 
-    private final ActivityResultLauncher<String> requestPermissionLauncher =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-                if (isGranted) {
-                    // FCM SDK (and your app) can post notifications.
-                } else {
-                    // TODO: Inform user that that your app will not show notifications.
-                }
-            });
-
-    private void askNotificationPermission() {
-        // This is only necessary for API level >= 33 (TIRAMISU)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) ==
-                    PackageManager.PERMISSION_GRANTED) {
-
-                // FCM SDK (and your app) can post notifications.
-            } else if (shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)) {
-                // TODO: display an educational UI explaining to the user the features that will be enabled
-                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
-                //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
-                //       If the user selects "No thanks," allow the user to continue without notifications.
-            } else {
-                // Directly ask for the permission
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
-            }
-        }
-    }
-
-
     FirebaseFirestore firestore;
     String[] emailArray = {};
 
@@ -99,7 +70,7 @@ public class SendNotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_notification);
         getEmails();
-        askNotificationPermission();
+        //askNotificationPermission();
 
 
 
@@ -261,7 +232,6 @@ public class SendNotificationActivity extends AppCompatActivity {
         String formattedDate = sdf.format(currentDate);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        // String userEmail = user.getEmail();
 
         for (String userEmail : emailArray) {
             firestore.collection(userEmail).document("Notis")
@@ -270,9 +240,6 @@ public class SendNotificationActivity extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                             int fieldCount = documentSnapshot.getData().size();
                             //String temp = "noti" + (fieldCount + 1);
-//                            Date currentDate = new Date();
-//                            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd yyyy HH:mm:ss");
-//                            String formattedDate = sdf.format(currentDate);
                             firestore.collection(userEmail).document("Notis")
                                     .update(formattedDate, messageText)
                                     .addOnSuccessListener(aVoid -> {
@@ -329,65 +296,14 @@ public class SendNotificationActivity extends AppCompatActivity {
                     });
         }
 
-
-//        // This registration token comes from the client FCM SDKs.
-//        String registrationToken = "YOUR_REGISTRATION_TOKEN";
-//
-//        // See documentation on defining a message payload.
-//                Message message = Message.builder()
-//                        .putData("score", "850")
-//                        .putData("time", "2:45")
-//                        .setToken(registrationToken)
-//                        .build();
-//
-//        // Send a message to the device corresponding to the provided
-//        // registration token.
-//                String response = FirebaseMessaging.getInstance().send(message);
-//        // Response is a message ID string.
-//        System.out.println("Successfully sent message: " + response);
-
-        //sendNotificationToTopic(messageText);
-
-
-//        EditText title = findViewById(R.id.titleId);
-//        EditText message = findViewById(R.id.messageId);
-//        EditText token = findViewById(R.id.tokenId);
-
         FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
                 formattedDate,
                 messageText, getApplicationContext(), SendNotificationActivity.this);
         notificationsSender.SendNotifications();
 
-
-
-
-
-
-
-
+        messageEditText.setText("");
 
     }
-
-
-
-
-
-
-
-
-
-//    private void sendNotificationToTopic(String messageText) {
-//        // Construct the notification message
-//        Map<String, String> data = new HashMap<>();
-//        data.put("message", messageText);
-//
-//        // Send the notification to the topic
-//        FirebaseMessaging.getInstance().send(new RemoteMessage.Builder("pushNotis")
-//                .setData(data)
-//                .build());
-//    }
-
-
 
 }
 

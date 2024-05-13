@@ -126,7 +126,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private void sendNotification(String messageBody) {
         // test MainActivityt name ot SendNotiManager
-        Intent intent = new Intent(this, SendNotificationActivity.class);
+        Intent intent = new Intent(this, NotificationsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_IMMUTABLE);
@@ -135,7 +135,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_stat_noti)
+                        .setSmallIcon(R.drawable.logo)
                         .setContentTitle("New Notification")
                         .setContentText(messageBody)
                         .setAutoCancel(true)
