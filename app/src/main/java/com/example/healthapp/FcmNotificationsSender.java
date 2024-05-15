@@ -49,7 +49,7 @@ public class FcmNotificationsSender {
             JSONObject notiObject = new JSONObject();
             notiObject.put("title", title);
             notiObject.put("body", body);
-            notiObject.put("icon", R.drawable.icon); // enter icon that exists in drawable only
+            notiObject.put("icon", R.drawable.logosvg); // enter icon that exists in drawable only
 
 
 
@@ -72,25 +72,16 @@ public class FcmNotificationsSender {
             }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-
-
                     Map<String, String> header = new HashMap<>();
                     header.put("content-type", "application/json");
                     header.put("authorization", "key=" + fcmServerKey);
                     return header;
-
-
                 }
             };
             requestQueue.add(request);
 
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 }
