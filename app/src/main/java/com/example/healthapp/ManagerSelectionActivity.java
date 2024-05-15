@@ -1,3 +1,5 @@
+//Reused Code for Notis To get emails that manager can click on to see stats
+
 package com.example.healthapp;
 
 import static android.content.ContentValues.TAG;
@@ -47,6 +49,8 @@ public class ManagerSelectionActivity extends AppCompatActivity {
         onClickUpdate();
     }
 
+
+    //reused notis function to get notis but instead it gets all the emails of the users which are stored in JustEmails in FireBase
     public void onClickUpdate() {
         firestore = FirebaseFirestore.getInstance();
         ArrayList<String> allNotis = new ArrayList<>();
@@ -58,20 +62,13 @@ public class ManagerSelectionActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
                     Map<String, Object> data = document.getData();
-                    // Now you can use the 'data' map to access all fields and their values
                     for (String key : data.keySet()) {
                         Object value = data.get(key);
 
-                        //String date = key;
 
                         String valueString = String.valueOf(value);
-//                        TextView textView = findViewById(R.id.noti1);
-//                        textView.setText(valueString);
                         allNotis.add(valueString);
-                        //allNotis.add(date);
-                        // Do something with each field and its value
                         Log.d(TAG, "Field: " + key + ", Value: " + value);
                     }
                     updateNotificationTextView(allNotis);
@@ -92,12 +89,12 @@ public class ManagerSelectionActivity extends AppCompatActivity {
 
 
 
-
+    //reused the notis function for the view for selecting emails for the manager
     private void updateNotificationTextView(ArrayList<String> allNotis) {
         // Find the parent LinearLayout where you want to add the TextViews
         LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
 
-        // Iterate through each notification string
+        // Iterate through each emails strings
         for (String notification : allNotis) {
             // Create a new TextView
             TextView textView = new TextView(this);
@@ -108,7 +105,7 @@ public class ManagerSelectionActivity extends AppCompatActivity {
             textView.setPadding(50, 50, 50, 50);
             textView.setTextColor(getResources().getColor(android.R.color.white));
 
-            // Set the background drawable resource with rounded corners
+            // Set the background drawable
             textView.setBackgroundResource(R.drawable.rounded_corners_background);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -119,6 +116,7 @@ public class ManagerSelectionActivity extends AppCompatActivity {
             textView.setLayoutParams(params);
 
             textView.setOnClickListener(v -> {
+                //Passes the Email of selected user to the Stats Screen
 
                 Intent intent = new Intent(ManagerSelectionActivity.this, ParticipantInformationActivity.class);
                 intent.putExtra("Email", textView.getText());

@@ -12,9 +12,7 @@
     android:gravity="center"
     tools:context=".MainActivity">
 
-    <!-- Makes entry box for user to enter the number-->
 
-    <!-- Displays the current total value-->
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
@@ -35,7 +33,7 @@
             android:gravity="center"
             android:onClick="onClickLogin" />
 
-        <!-- Button to allow the user to reset the result-->
+
         <Button
             android:id="@+id/signup"
             android:layout_width="wrap_content"

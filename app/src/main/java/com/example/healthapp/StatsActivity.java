@@ -1,4 +1,4 @@
-
+//Stats Activity Gets Each of the Exercises of the User on creation to make less delay when swithcing betweeen the time periods
 package com.example.healthapp;
 
 import android.content.Context;
@@ -43,6 +43,8 @@ public class StatsActivity extends AppCompatActivity {
     TextView totalTimeAvg;
 
     int totalTimeMin;
+
+    //HashMaps Made to Get Users Data and Hold onto for easy use instead of getting it each time
     HashMap<String, String> runningData = new HashMap<>();
     HashMap<String, String> walkingData = new HashMap<>();
     HashMap<String, String> stairsData = new HashMap<>();
@@ -110,6 +112,8 @@ public class StatsActivity extends AppCompatActivity {
 
 
 
+        //Each of these 3 Times it gets changes the layout background so you know which one you are on
+        //Then it sets the avg and total of thos dates after calling the function
         WeekLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +160,7 @@ public class StatsActivity extends AppCompatActivity {
         });
     }
 
+    //Nav Bar
     public void onClickExercise(View view) {
         Intent intent = new Intent(StatsActivity.this, ExerciseActivity.class);
         startActivity(intent);
@@ -173,6 +178,7 @@ public class StatsActivity extends AppCompatActivity {
         void onDataLoaded(HashMap<String, String> data);
     }
 
+    //This Gets All the data for each of the exericses and holds them in a hashmap
     public void getALLData(String Type, DataCallback callback) {
         final HashMap<String, String> fieldValueMap = new HashMap<>(); // Initialize HashMap to store field names and values
 
@@ -188,7 +194,6 @@ public class StatsActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                // Iterate through all fields in the document
                                 for (Map.Entry<String, Object> entry : document.getData().entrySet()) {
                                     String fieldName = entry.getKey();
                                     String fieldValue = entry.getValue().toString(); // Assuming all values are strings
@@ -196,7 +201,6 @@ public class StatsActivity extends AppCompatActivity {
                                     // Add field name and value to the HashMap
                                     fieldValueMap.put(fieldName, fieldValue);
                                 }
-                                // Call the callback method with the data
                                 callback.onDataLoaded(fieldValueMap);
                             } else {
                                 Log.d(TAG, "No document");
@@ -210,6 +214,7 @@ public class StatsActivity extends AppCompatActivity {
 
 
 
+    //gets the total and avg for a date period and sets it
     private void calculateTotalMinutes(HashMap<String, String> data,TextView textView,TextView textViewAvg,int time) {
 
 
@@ -224,17 +229,18 @@ public class StatsActivity extends AppCompatActivity {
 
             String selectedDate = (Month + 1) + "-" + Day + "-" + Year;
             for (Map.Entry<String, String> entry : data.entrySet()) {
-                // Check if the entry's key (date) matches the selected date
                 if (entry.getKey().equals(selectedDate)) {
-                    // If the date matches, add the minutes to the total
+                    // If the date matches add the minutes to the total
                     totalMinutes += Integer.parseInt(entry.getValue());
                 }
             }
         }
+        //sets total mins
         totalTimeMin += totalMinutes;
         String output = "Total:"+totalMinutes +" Minutes";
         textView.setText(String.valueOf(output));
 
+        //sets avg
         int totalMinutesAvg = totalMinutes/time;
         output = "Avg:"+totalMinutesAvg +" Minutes";
         textViewAvg.setText(String.valueOf(output));
@@ -248,6 +254,8 @@ public class StatsActivity extends AppCompatActivity {
         calculateTotalMinutes(weightsData, weightTime,weightTimeAvg, time);
         calculateTotalMinutes(stairsData, stairsTime,stairsTimeAvg, time);
     }
+
+    //calls function for each of the data types
     private void DataEqual(String exerciseType, Runnable callback) {
         getALLData(exerciseType, new DataCallback() {
             @Override

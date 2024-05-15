@@ -1,3 +1,4 @@
+//Start Page of the app and redirects user automatically if they already are logged in
 package com.example.healthapp;
 
 import android.content.Context;
@@ -40,15 +41,11 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
 
         super.onStart();
-        // Initialize Firebase Authentication instance
+        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
-
-//        Intent intent = new Intent(MainActivity.this, HomeActivity.class); // Change SignUpActivity to HomeActivity
-//        startActivity(intent);
-
-
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        //This is for if the user closes the app they wont have to login again it will automatically take them to the screens
 
         if(currentUser != null){
             if(Objects.equals(currentUser.getEmail(), "manager@gmail.com"))
@@ -63,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    //If the user isnt logged in this will take place
     public void onClickLogin(View view) {
         // Redirect to the login page
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

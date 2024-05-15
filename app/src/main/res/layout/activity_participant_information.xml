@@ -93,7 +93,7 @@
                 android:textSize="20sp"/>
         </LinearLayout>
 
-        <!-- First LinearLayout with text -->
+
         <LinearLayout
             android:clickable="true"
             android:id="@+id/Week"
@@ -116,7 +116,7 @@
                 android:textSize="20sp"/>
         </LinearLayout>
 
-        <!-- Second LinearLayout with text -->
+
         <LinearLayout
             android:clickable="true"
             android:id="@+id/Month"
@@ -139,7 +139,7 @@
                 android:textSize="20sp"/>
         </LinearLayout>
 
-        <!-- Third LinearLayout with text -->
+
         <LinearLayout
             android:clickable="true"
             android:id="@+id/Year"

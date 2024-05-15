@@ -1,3 +1,4 @@
+//login screen using firebase authentication
 package com.example.healthapp;
 
 import android.app.Activity;
@@ -50,15 +51,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize EditText fields
+
         mAuth = FirebaseAuth.getInstance();
 
-        // Initialize EditText fields
+
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.password);
         loginButton = findViewById(R.id.loginButton);
 
-        // Implement your authentication logic here
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,18 +85,21 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(LoginActivity.this, "Login Success",
                                             Toast.LENGTH_SHORT).show();
+
+                                    //Manager Email is set here goes into manager views
                                     if (username.equals("manager@gmail.com")) {
                                         Intent intent = new Intent(LoginActivity.this, ManagerHomeActivity.class);
                                         startActivity(intent);
                                         finish();
                                     } else {
+                                        //any user will go to home they cant get into manager views
                                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
 
                                 } else {
-                                    // If sign in fails, display a message to the user.
+                                    // If sign in fails
                                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
 
@@ -108,6 +112,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
+
+    //confirming reset for the email
     public void showResetPasswordDialog(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter your Email");
@@ -117,7 +124,6 @@ public class LoginActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS); // Capitalize words
         builder.setView(input);
 
-        // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -142,15 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         // Password reset email sent successfully
-                        // You can inform the user or handle the UI accordingly
                         Log.d("SendPasswordReset", "Password reset email sent.");
-                        // Optionally, you can show a toast or dialog to inform the user
                         Toast.makeText(LoginActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
                     } else {
                         // Failed to send password reset email
-                        // You can inform the user or handle the UI accordingly
                         Log.e("SendPasswordReset", "Failed to send password reset email.", task.getException());
-                        // Optionally, you can show a toast or dialog to inform the user
                         Toast.makeText(LoginActivity.this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show();
                     }
                 }
