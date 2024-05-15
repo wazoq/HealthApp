@@ -40,13 +40,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText usernameEditText;
     EditText passwordEditText;
-
     Button signButton;
-
     EditText nameEditText;
-
     FirebaseAuth mAuth;
-
     FirebaseFirestore firestore;
 
     @Override
@@ -144,64 +140,27 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                         });
 
-
-
-
-
-
-
-
-
-
-
                 FirebaseMessaging.getInstance().getToken()
                         .addOnCompleteListener(new OnCompleteListener<String>() {
                             @Override
                             public void onComplete(@NonNull Task<String> task) {
                                 if (task.isSuccessful()) {
-                                    // Get new FCM registration token
                                     String token = task.getResult();
-
-                                    // Log and toast
                                     Log.d(TAG, "FCM Token: " + token);
 
-                                    // Store the token in Firestore along with other user information
                                     HashMap<String, Object> userInfo = new HashMap<>();
                                     userInfo.put("Name", name);
                                     userInfo.put("Token", token);
                                     firestore.collection(username).document("UserInfo").set(userInfo);
-
-                                    // Proceed with other Firestore operations or navigate to the next screen
                                 } else {
-                                    // Handle token retrieval failure
                                     Log.w(TAG, "Fetching FCM registration token failed", task.getException());
                                     Toast.makeText(SignUpActivity.this, "Failed to get FCM token",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
         });
-
-
     }
 
     public void onClickBack(View view) {

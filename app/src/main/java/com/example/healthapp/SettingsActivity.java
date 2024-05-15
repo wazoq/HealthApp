@@ -336,7 +336,6 @@ public class SettingsActivity extends AppCompatActivity {
     Boolean darkMode;
     private Switch Switch;
     boolean nightMode;
-
     Boolean notifications;
 
     @Override
@@ -356,7 +355,6 @@ public class SettingsActivity extends AppCompatActivity {
         Switch = findViewById(R.id.lightModeSwitch);
         Switch.setChecked(sharedPreferences.getBoolean("Light", false));
 
-
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor;
         editor = sharedPreferences.edit();
@@ -370,7 +368,6 @@ public class SettingsActivity extends AppCompatActivity {
                 recreate();
             }
         });
-
 
         Switch notificationsSwitch = findViewById(R.id.notifications_switch);
         notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -402,7 +399,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish(); // Call finish to close the current activity
+                finish();
             }
         });
 
@@ -414,11 +411,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
         updateScreenName();
-
-
     }
-
-
 
     public void updateScreenName() {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -426,20 +419,14 @@ public class SettingsActivity extends AppCompatActivity {
         String userEmail = user.getEmail();
         CollectionReference collectionReference = firestore.collection(userEmail);
 
-        // Get document from collection
         collectionReference.document("UserInfo").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
                     Map<String, Object> data = document.getData();
-                    // Now you can use the 'data' map to access all fields and their values
                     Object value = data.get("Name");
                     String name = value != null ? String.valueOf(value) : "";
-                    // Do something with the retrieved name value, such as displaying it
                     Log.d(TAG, "Name: " + name);
-
-                    // Call a method to handle the retrieved name value
                     handleName(name);
                 } else {
                     Log.d(TAG, "Error: Document doesn't exist");
@@ -451,8 +438,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void handleName(String name) {
-        // Here, you can use the retrieved name value as needed
-        // For example, you can update a TextView with the name
         TextView nameTextView = findViewById(R.id.screenName);
         nameTextView.setText(name);
     }
@@ -461,19 +446,16 @@ public class SettingsActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Change Name");
 
-        // Set up the input
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS); // Capitalize words
-        input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)}); // Set maximum length to 12 characters
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(12)});
         builder.setView(input);
 
-        // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newName = input.getText().toString();
-                // Handle the new name here (e.g., update user profile or display it)
-                updateUserName(newName);  // Implement this method to update the user's name
+                updateUserName(newName);
                 updateScreenName();
             }
         });
@@ -483,7 +465,6 @@ public class SettingsActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
         builder.show();
     }
 
@@ -493,43 +474,22 @@ public class SettingsActivity extends AppCompatActivity {
         String userEmail = user.getEmail();
         CollectionReference collectionReference = firestore.collection(userEmail);
 
-        // Create a new HashMap to hold the updated data
         Map<String, Object> newData = new HashMap<>();
         newData.put("Name", newName);
 
-        // Update the document with the new data
         collectionReference.document("UserInfo")
                 .update(newData)
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, "DocumentSnapshot successfully updated!");
-                    // Handle success, such as displaying a success message
                     Toast.makeText(this, "Name updated successfully", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     Log.d(TAG, "Error updating document", e);
-                    // Handle errors, such as displaying an error message
                     Toast.makeText(this, "Failed to update name", Toast.LENGTH_SHORT).show();
                 });
     }
 
-//        if (user != null) {
-//            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                    .setDisplayName(newName)
-//                    .build();
-//            user.updateProfile(profileUpdates)
-//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if (task.isSuccessful()) {
-//                                Log.d("Profile", "User name updated.");
-//                            }
-//                        }
-//                    });
-//        }
-    //   }
-
     private void sendPasswordResetEmail() {
-        // check what to call in get() method
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             FirebaseAuth.getInstance().sendPasswordResetEmail(user.getEmail())
@@ -537,16 +497,10 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                // Password reset email sent successfully
-                                // You can inform the user or handle the UI accordingly
                                 Log.d("SendPasswordReset", "Password reset email sent.");
-                                // Optionally, you can show a toast or dialog to inform the user
                                 Toast.makeText(SettingsActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
                             } else {
-                                // Failed to send password reset email
-                                // You can inform the user or handle the UI accordingly
                                 Log.e("SendPasswordReset", "Failed to send password reset email.", task.getException());
-                                // Optionally, you can show a toast or dialog to inform the user
                                 Toast.makeText(SettingsActivity.this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -554,14 +508,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-
     public void onClickBack(View view) {
         Intent intent = new Intent(SettingsActivity.this, HomeActivity.class);
         startActivity(intent);
     }
-
-
-
-
 }
 

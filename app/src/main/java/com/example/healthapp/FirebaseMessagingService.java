@@ -24,41 +24,31 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // TODO(developer): Handle FCM messages here.
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d("mooooo", "From: " + remoteMessage.getFrom());
+        Log.d("Test", "From: " + remoteMessage.getFrom());
 
-        // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d("mooooo1", "Message data payload: " + remoteMessage.getData());
+            Log.d("Test", "Message data payload: " + remoteMessage.getData());
 
         }
 
-        // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d("mooooo2", "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d("Test", "Message Notification Body: " + remoteMessage.getNotification().getBody());
 
-            // Display the notification message as a toast from the main thread
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
                     Toast.makeText(getApplicationContext(), remoteMessage.getNotification().getBody(), Toast.LENGTH_LONG).show();
                 }
             });
-            //Toast.makeText(FirebaseMessagingService.this.getApplicationContext(), remoteMessage.getNotification().getBody(), Toast.LENGTH_LONG).show();
         }
 
-        //Toast.makeText(getApplicationContext(), remoteMessage.getNotification().getBody(), Toast.LENGTH_LONG).show();
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
         sendNotification(remoteMessage.getNotification().getBody());
     }
 
     private void sendNotification(String messageBody) {
-        // test MainActivityt name ot SendNotiManager
         Intent intent = new Intent(this, NotificationsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_IMMUTABLE);
 
         Date currentDate = new Date();
@@ -79,7 +69,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,
                     "Channel human readable title",
@@ -87,15 +76,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             notificationManager.createNotificationChannel(channel);
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        notificationManager.notify(0, notificationBuilder.build());
     }
 
-
-
-
-
-
-
 }
-
-

@@ -30,7 +30,7 @@ public class ManagerHomeActivity extends AppCompatActivity {
         sendNotificationBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Redirect to the login page
+                // Redirect to the send notifications page
                 Intent intent = new Intent(ManagerHomeActivity.this, SendNotificationActivity.class);
                 startActivity(intent);
             }
@@ -40,7 +40,7 @@ public class ManagerHomeActivity extends AppCompatActivity {
         particapantInfoBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Redirect to the login page
+                // Redirect to the participant info page
                 Intent intent = new Intent(ManagerHomeActivity.this, ManagerSelectionActivity.class);
                 startActivity(intent);
             }
@@ -51,11 +51,10 @@ public class ManagerHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                // After logout, clear all activities and start the LoginActivity
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish(); // Call finish to close the current activity
+                finish();
             }
         });
 
@@ -63,14 +62,12 @@ public class ManagerHomeActivity extends AppCompatActivity {
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // send firebase link to reset password
                 sendPasswordResetEmail();
             }
         });
     }
 
     private void sendPasswordResetEmail() {
-        // check what to call in get() method
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             FirebaseAuth.getInstance().sendPasswordResetEmail(user.getEmail())
@@ -78,26 +75,15 @@ public class ManagerHomeActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                // Password reset email sent successfully
-                                // You can inform the user or handle the UI accordingly
                                 Log.d("SendPasswordReset", "Password reset email sent.");
-                                // Optionally, you can show a toast or dialog to inform the user
                                 Toast.makeText(ManagerHomeActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
                             } else {
-                                // Failed to send password reset email
-                                // You can inform the user or handle the UI accordingly
                                 Log.e("SendPasswordReset", "Failed to send password reset email.", task.getException());
-                                // Optionally, you can show a toast or dialog to inform the user
                                 Toast.makeText(ManagerHomeActivity.this, "Failed to send password reset email.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
         }
     }
-
-
-
-
-
 
 }

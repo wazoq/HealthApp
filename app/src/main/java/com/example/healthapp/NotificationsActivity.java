@@ -59,9 +59,7 @@ public class NotificationsActivity extends AppCompatActivity {
         else {
             setTheme(R.style.Base_Theme_HealthApp);
         }
-
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_notifications);
         onClickUpdate();
     }
@@ -74,7 +72,6 @@ public class NotificationsActivity extends AppCompatActivity {
 
         CollectionReference collectionReference = firestore.collection(userEmail);
 
-        // Get document from collection
         collectionReference.document("Notis").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -82,9 +79,7 @@ public class NotificationsActivity extends AppCompatActivity {
                     Map<String, Object> data = document.getData();
                     for (String key : data.keySet()) {
                         Object value = data.get(key);
-
                         String date = key;
-
                         String valueString = String.valueOf(value);
                         allNotis.add(valueString);
                         allNotis.add(date);
@@ -99,8 +94,6 @@ public class NotificationsActivity extends AppCompatActivity {
             }
         });
 
-
-
         firestore.collection(userEmail).document("UserInfo")
                 .update("newNoti", false)
                 .addOnSuccessListener(aVoid -> {
@@ -109,15 +102,6 @@ public class NotificationsActivity extends AppCompatActivity {
                     if (e != null) {
                     }
                 });
-
-
-
-
-
-
-
-
-
     }
 
     //Showing the Notis on the screen to the user
@@ -127,7 +111,6 @@ public class NotificationsActivity extends AppCompatActivity {
 
         // Clear existing views before adding new ones
         parentLayout.removeAllViews();
-
 
         for (int i = 0; i < allNotis.size(); i += 2) {
             String fieldName = allNotis.get(i);
@@ -145,18 +128,15 @@ public class NotificationsActivity extends AppCompatActivity {
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT // Use WRAP_CONTENT for TextView height
+                    LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            params.setMargins(50, 40, 50,  40); // Adjust margins as needed
+            params.setMargins(50, 40, 50,  40);
             fieldTextView.setLayoutParams(params);
             fieldTextView.setOnTouchListener(new OnSwipeTouchListener(this) {
                 public void onSwipeLeft() {
-                    // Handle swipe (delete notification)
                     showDeleteConfirmationDialog(fieldValue);
                 }
             });
-
-            // Add the TextView to the parent layout
             parentLayout.addView(fieldTextView);
         }
     }
@@ -181,8 +161,6 @@ public class NotificationsActivity extends AppCompatActivity {
                     Toast.makeText(this, "Failed to delete notification", Toast.LENGTH_SHORT).show();
                 });
     }
-
-
 
     public void onClickBack(View view) {
         Intent intent = new Intent(NotificationsActivity.this, HomeActivity.class);
@@ -214,7 +192,4 @@ public class NotificationsActivity extends AppCompatActivity {
 
         builder.show();
     }
-
-
-
 }

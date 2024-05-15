@@ -191,8 +191,6 @@ public class ParticipantInformationActivity extends AppCompatActivity {
                 });
     }
 
-
-
     private void calculateTotalMinutes(HashMap<String, String> data,TextView textView,TextView textViewAvg,int time) {
 
 
@@ -225,9 +223,6 @@ public class ParticipantInformationActivity extends AppCompatActivity {
         else {
             textViewAvg.setText(" ");
         }
-
-
-
     }
 
     private void updateExerciseStats(int time) {

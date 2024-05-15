@@ -112,8 +112,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
-
     //confirming reset for the email
     public void showResetPasswordDialog(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
