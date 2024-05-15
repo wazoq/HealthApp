@@ -1,3 +1,6 @@
+//Backend to get users data and put it into firebase database aswell as group stats section of database
+
+
 package com.example.healthapp;
 
 import android.content.Context;
@@ -47,6 +50,7 @@ public class InputActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //theme
         SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         boolean themecheck = sharedPreferences.getBoolean("Light", false);
         if(themecheck)
@@ -88,6 +92,7 @@ public class InputActivity extends AppCompatActivity {
                 int curMonth = calendar.get(Calendar.MONTH);
                 int curDay = calendar.get(Calendar.DAY_OF_MONTH);
 
+                //check if the date is in the future if so it resets the date to current date
                 if (curYear < year) {
                     calendarView.setDate(calendar.getTimeInMillis(), true, true);
                 }
@@ -130,6 +135,7 @@ public class InputActivity extends AppCompatActivity {
         durationText = findViewById(R.id.time);
         String durationStr = durationText.getText().toString();
 
+        //adds duration to database if already exisits it just updates it
         try {
             int duration = Integer.parseInt(durationStr);
             firestore.collection(userEmail).document(ExerciseType)
@@ -159,6 +165,9 @@ public class InputActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
         }
 
+
+
+            //This is used to update group stats part of Firebase
             int duration = Integer.parseInt(durationStr);
             firestore.collection("GroupStats").document(ExerciseType)
                     .get()

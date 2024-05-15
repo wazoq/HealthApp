@@ -1,3 +1,5 @@
+//Gets the Exericse the user selects and passes it to the next screen
+
 package com.example.healthapp;
 
 import android.content.Context;
@@ -18,6 +20,7 @@ public class ExerciseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Dark mode or light mode
         SharedPreferences sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
         boolean themecheck = sharedPreferences.getBoolean("Light", false);
         if(themecheck)
@@ -36,6 +39,10 @@ public class ExerciseActivity extends AppCompatActivity {
         LinearLayout Yoga = findViewById(R.id.Yoga);
         LinearLayout Weights = findViewById(R.id.Weights);
         LinearLayout Stairs = findViewById(R.id.Stairs);
+
+
+
+        //Passes the workout selected to the next screen
         Running.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +79,8 @@ public class ExerciseActivity extends AppCompatActivity {
             }
         });
 
+
+
         Weights.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +91,8 @@ public class ExerciseActivity extends AppCompatActivity {
         });
     }
 
+
+    //Nav Bar Buttons
     public void onClickHome(View view) {
         Intent intent = new Intent(ExerciseActivity.this, HomeActivity.class);
         startActivity(intent);
