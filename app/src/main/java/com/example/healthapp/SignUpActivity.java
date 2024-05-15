@@ -1,3 +1,5 @@
+//Lets user make an account and sets up a database collection in their email
+
 package com.example.healthapp;
 
 import static android.content.ContentValues.TAG;
@@ -104,6 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+                //first it creates a authenticated user in the base
                 mAuth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                             @Override
@@ -113,6 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
 
 
+                                    //sets up the firestore for each of the type of Exercises aswell as Notifications
                                     firestore.collection(username).document("Yoga").set(new HashMap<>());
                                     firestore.collection(username).document("Running").set(new HashMap<>());
                                     firestore.collection(username).document("Walking").set(new HashMap<>());
@@ -120,45 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     firestore.collection(username).document("Weight Lifting").set(new HashMap<>());
                                     firestore.collection(username).document("Notis").set(new HashMap<>());
 
-
-//                                    final String[] token = new String[1];
-//
-//                                    // test token
-//                                    FirebaseMessaging.getInstance().getToken()
-//                                            .addOnCompleteListener(new OnCompleteListener<String>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<String> task) {
-//                                                    if (!task.isSuccessful()) {
-//                                                        //Log.w(TAG, "Fetching FCM registration token failed", task.getException());
-//                                                        System.out.println("Fetching FCM registration token failed");
-//                                                        return;
-//                                                    }
-//
-//                                                    // Get new FCM registration token
-//                                                    token[0] = task.getResult();
-//
-//                                                    // Log and toast
-//                                                    //Log.d(TAG, msg);
-//                                                    System.out.println(token[0]);
-//                                                    Toast.makeText(SignUpActivity.this, "Your device registration token is " + token[0],
-//                                                            Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            });
-//                                    // test token close
-
-
-
-
-
-
-
-
-
-//                                    HashMap<String, Object> userInfo = new HashMap<>();
-//                                    userInfo.put("Name", name);
-//                                    userInfo.put("Token" , token[0]);
-//                                    firestore.collection(username).document("UserInfo").set(userInfo);
-
+                                    //Adds email to a collectoin of emails for the manager to see
                                     HashMap<String, Object> updateData = new HashMap<>();
                                     updateData.put(username, username);
 
@@ -235,7 +201,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        // Implement your authentication logic here
+
     }
 
     public void onClickBack(View view) {

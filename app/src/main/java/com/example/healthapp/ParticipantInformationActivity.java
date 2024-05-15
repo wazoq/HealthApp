@@ -1,4 +1,4 @@
-
+//Copy And Paste of StatsActivity Used on the Managers Side to See each users Stats and Group Stats
 package com.example.healthapp;
 
 import android.content.Intent;
@@ -180,7 +180,6 @@ public class ParticipantInformationActivity extends AppCompatActivity {
                                     // Add field name and value to the HashMap
                                     fieldValueMap.put(fieldName, fieldValue);
                                 }
-                                // Call the callback method with the data
                                 callback.onDataLoaded(fieldValueMap);
                             } else {
                                 Log.d(TAG, "No document");
@@ -208,9 +207,8 @@ public class ParticipantInformationActivity extends AppCompatActivity {
 
             String selectedDate = (Month + 1) + "-" + Day + "-" + Year;
             for (Map.Entry<String, String> entry : data.entrySet()) {
-                // Check if the entry's key (date) matches the selected date
                 if (entry.getKey().equals(selectedDate)) {
-                    // If the date matches, add the minutes to the total
+                    // If the date matches add the minutes to the total
                     totalMinutes += Integer.parseInt(entry.getValue());
                 }
             }

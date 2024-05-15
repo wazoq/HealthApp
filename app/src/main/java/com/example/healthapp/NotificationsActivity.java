@@ -1,3 +1,4 @@
+//Gets all the notis from the collectoin called Notis and Displays them to the User
 package com.example.healthapp;
 
 import static android.content.ContentValues.TAG;
@@ -78,9 +79,7 @@ public class NotificationsActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    // DocumentSnapshot contains the data of the document
                     Map<String, Object> data = document.getData();
-                    // Now you can use the 'data' map to access all fields and their values
                     for (String key : data.keySet()) {
                         Object value = data.get(key);
 
@@ -89,7 +88,6 @@ public class NotificationsActivity extends AppCompatActivity {
                         String valueString = String.valueOf(value);
                         allNotis.add(valueString);
                         allNotis.add(date);
-                        // Do something with each field and its value
                         Log.d(TAG, "Field: " + key + ", Value: " + value);
                     }
                     updateNotificationTextView(allNotis);
@@ -106,19 +104,9 @@ public class NotificationsActivity extends AppCompatActivity {
         firestore.collection(userEmail).document("UserInfo")
                 .update("newNoti", false)
                 .addOnSuccessListener(aVoid -> {
-                    // Document successfully updated
-                    // Handle success if needed
-
-                    //FCMSend.pushNotification();
-                    //Toast.makeText(NotificationsActivity.this, "newNoti boolean changed false.",
-                    //        Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    // Handle errors
                     if (e != null) {
-                        // Handle exceptions
-                      //  Toast.makeText(NotificationsActivity.this, "newNoti boolean change failed.",
-                      //          Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -132,51 +120,19 @@ public class NotificationsActivity extends AppCompatActivity {
 
     }
 
+    //Showing the Notis on the screen to the user
     private void updateNotificationTextView(ArrayList<String> allNotis) {
-        // Find the parent LinearLayout where you want to add the TextViews
-        LinearLayout parentLayout = findViewById(R.id.notificationsLayout); // Replace R.id.parentLayout with the ID of your parent LinearLayout
+        // Find the parent LinearLayout
+        LinearLayout parentLayout = findViewById(R.id.notificationsLayout);
 
         // Clear existing views before adding new ones
         parentLayout.removeAllViews();
 
-        // Iterate through each notification string
-//        for (String notification : allNotis) {
-//            // Create a new TextView
-//            TextView textView = new TextView(this);
-//
-//            // Set the text of the TextView
-//            textView.setText(notification);
-//            textView.setTextSize(18);
-//            textView.setPadding(50, 50, 50, 50);
-//            textView.setTextColor(getResources().getColor(android.R.color.white));
-//
-//            // Set the background drawable resource with rounded corners
-//            textView.setBackgroundResource(R.drawable.rounded_corners_background);
-//
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT // Use WRAP_CONTENT for TextView height
-//            );
-//            params.setMargins(50, 40, 50,  40); // Adjust margins as needed
-//            textView.setLayoutParams(params);
-//
-//            textView.setOnLongClickListener(v -> {
-//                deleteNotification(notification);
-//                // Return true to indicate that the long click event is consumed
-//                return true;
-//            });
-//
-//            // Add the TextView to the parent layout
-//            parentLayout.addView(textView);
-//        }
-
 
         for (int i = 0; i < allNotis.size(); i += 2) {
-            // Get the field name and value at the current index
             String fieldName = allNotis.get(i);
             String fieldValue = allNotis.get(i + 1);
 
-            // Concatenate the field name and value with a newline character
             String fieldText = fieldValue + "\n" + fieldName;
 
             // Create a new TextView for the field name and value
@@ -195,7 +151,7 @@ public class NotificationsActivity extends AppCompatActivity {
             fieldTextView.setLayoutParams(params);
             fieldTextView.setOnTouchListener(new OnSwipeTouchListener(this) {
                 public void onSwipeLeft() {
-                    // Handle swipe left action (delete notification)
+                    // Handle swipe (delete notification)
                     showDeleteConfirmationDialog(fieldValue);
                 }
             });
@@ -216,13 +172,12 @@ public class NotificationsActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     // Notification deleted successfully
                     Log.d(TAG, "Notification deleted successfully");
-                    // Update the UI to reflect the changes (reload the notifications)
                     onClickUpdate();
                 })
                 .addOnFailureListener(e -> {
                     // Failed to delete the notification
                     Log.e(TAG, "Error deleting notification", e);
-                    // Show an error message to the user
+                    // Show an error message
                     Toast.makeText(this, "Failed to delete notification", Toast.LENGTH_SHORT).show();
                 });
     }
@@ -234,14 +189,16 @@ public class NotificationsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    //Confirmation for deleteing a noti
     private void showDeleteConfirmationDialog(String fieldValue) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Delete");
 
-        // Set up the message
+        // Delete Message
         builder.setMessage("Are you sure you want to delete this?");
 
-        // Set up the buttons
+        // Buttons on Display
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
