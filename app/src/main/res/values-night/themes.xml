@@ -1,9 +1,7 @@
 
 
 <resources xmlns:tools="http://schemas.android.com/tools">
-<!-- Base application theme -->
 <style name="Base.Theme.HealthAppNight" parent="Theme.AppCompat">
-    <!-- Customize your light mode theme here -->
     <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     <item name="colorPrimary">#444</item>
     <item name="android:windowBackground">#C8D1E6</item>
@@ -18,11 +16,10 @@
     <item name="buttonStyle">@style/OvalButton</item>
 </style>
 
-<!-- Define the oval button style -->
 <style name="OvalButton" parent="Widget.AppCompat.Button">
     <item name="android:background">@drawable/button</item>
 
 </style>
-<!-- Add other light mode specific attributes -->
+
 </resources>
 

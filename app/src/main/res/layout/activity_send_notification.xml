@@ -80,60 +80,6 @@
         android:onClick="onClickSend"/>
 
 
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center">
-
-        <EditText
-            android:id="@+id/titleId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="25dp"
-            android:hint="Title"/>
-
-        <EditText
-            android:id="@+id/messageId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="25dp"
-            android:hint="Message"/>
-
-        <EditText
-            android:id="@+id/tokenId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="25dp"
-            android:hint="Token"/>
-
-        <Button
-            android:id="@+id/alldeviceId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textSize="25dp"
-            android:text="Send all devices" />
-
-        <Button
-            android:id="@+id/singledeviceId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textSize="25dp"
-            android:text="Send all devices" />
-    </LinearLayout>
-    </ScrollView>-->
-
-
-
 
 
 </LinearLayout>

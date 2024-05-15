@@ -55,7 +55,6 @@ tools:context=".HomeActivity">
         android:paddingHorizontal="16dp"
         android:paddingBottom="16dp">
 
-        <!-- First horizontal LinearLayout -->
 
         <TextView
             android:layout_width="match_parent"
@@ -85,7 +84,7 @@ tools:context=".HomeActivity">
             android:gravity="center">
 
 
-            <!-- Box displaying the day underneath the month -->
+
             <TextView
                 android:id="@+id/WelcomeText"
                 android:layout_marginTop="12dp"
@@ -121,7 +120,7 @@ tools:context=".HomeActivity">
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <!-- Box displaying the day under the month -->
+
             <TextView
                 android:id="@+id/dayText"
                 android:layout_width="wrap_content"
